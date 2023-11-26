@@ -1,7 +1,4 @@
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-public class Tribuna extends Thread {
+public class Settore extends Thread {
     private int quantitàA;
     private int quantitàL;
     private Posto posti[][];
@@ -10,7 +7,7 @@ public class Tribuna extends Thread {
     private char[][] mappa;
 
 
-    public Tribuna(int quantitàA, int quantitàL, char i) {
+    public Settore(int quantitàA, int quantitàL, char i) {
         this.quantitàA = quantitàA;
         this.quantitàL = quantitàL;
         this.setName("Tribuna" + i);

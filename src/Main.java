@@ -7,13 +7,6 @@ import java.awt.event.MouseEvent;
 
 public class Main {
     public static void main(String[] args) {
-
-        Tribuna tribunaNord= new Tribuna(10,20,'N');
-        Tribuna tribunaEst = new Tribuna(20,10,'E');
-        Tribuna tribunaSud = new Tribuna(10,20,'S');
-        Tribuna tribunaOvest = new Tribuna(20,10,'O');
-        Stadio s = new Stadio(tribunaNord,tribunaEst,tribunaSud,tribunaOvest);
-        s.start();
     }
 }
 
