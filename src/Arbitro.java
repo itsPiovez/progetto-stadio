@@ -1,10 +1,9 @@
-public class Arbitro {
+public class Arbitro extends Thread {
     private String nome;
-    private String cognome;
-    private String tipoArbitro;
-    public Arbitro(String nome, String cognome, String tipoArbitro) {
+    public Arbitro(String nome) {
         this.nome = nome;
-        this.cognome = cognome;
-        this.tipoArbitro = tipoArbitro;
+    }
+    public String getNome() {
+        return nome;
     }
 }
