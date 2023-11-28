@@ -1,10 +1,15 @@
 public class Arbitro {
-    private String nome;
-    private String cognome;
-    private String tipoArbitro;
-    public Arbitro(String nome, String cognome, String tipoArbitro) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.tipoArbitro = tipoArbitro;
+    private String nomeArbitro;
+    private String[] nomeMaglia;
+    private int[]numeroMaglia;
+    private int numeroGiocatori;
+    private Giocatore[] giocatori;
+
+    public Arbitro(String nomeArbitro){
+        this.nomeArbitro=nomeArbitro;
+    }
+
+    public void run(){
+        System.out.println("L'arbitro "+nomeArbitro+" è pronto per la partita");
     }
 }
