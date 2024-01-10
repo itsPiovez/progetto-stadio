@@ -1,13 +1,21 @@
-public class Tempo extends Thread{
+class Tempo implements Runnable {
     private int tempo;
-    public Tempo(int tempo){
-        this.tempo=tempo;
+
+    public Tempo(int tempo) {
+        this.tempo = tempo;
     }
-    public void run(){
-        try{
-            Thread.sleep(tempo);
-        }catch(InterruptedException e){
-            e.printStackTrace();
+
+    @Override
+    public void run() {
+        while (tempo > 0) {
+            // Implementazione per gestire il tempo della partita
+            try {
+                Thread.sleep(1000); // Attendi un secondo
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tempo--;
         }
+        // Logica per fine partita
     }
 }

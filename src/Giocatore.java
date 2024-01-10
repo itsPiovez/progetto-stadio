@@ -1,21 +1,39 @@
-    public class Giocatore extends Thread{
-    private int numeroMaglia;
+import java.util.ArrayList;
+import java.util.List;
+
+class Giocatore {
+    private int id;
+    private String nomeMaglia;
     private String nomeSquadra;
-    private String[] nomeMaglia;
+    private int cartellini;
 
-    public Giocatore(int numeroMaglia,String nomeSquadra,String[] nomeMaglia){
-        this.numeroMaglia=numeroMaglia;
-        this.nomeSquadra=nomeSquadra;
+    public Giocatore(int id, String nomeMaglia, String nomeSquadra) {
+        this.id = id;
+        this.nomeMaglia = nomeMaglia;
+        this.nomeSquadra = nomeSquadra;
+        this.cartellini = 0;
     }
 
-    // metodo per caricare il nome del giocatore nell'array
-    public void setNomeMaglia(String[] nomeMaglia){
-        this.nomeMaglia=nomeMaglia;
+    public int getId() {
+        return id;
     }
 
-    public void run(){
-        System.out.println("Il giocatore "+nomeMaglia+" della squadra "+nomeSquadra+" con numero di maglia "+numeroMaglia+" è pronto per la partita");
+    public String getNomeMaglia() {
+        return nomeMaglia;
     }
 
+    public String getNome() {
+        return nomeMaglia;
+    }
 
+    public int incrementaCartellini() {
+        return ++cartellini;
+    }
+
+    public int getCartellini() {
+        return cartellini;
+    }
+    public String getNomeSquadra() {
+        return nomeSquadra;
+    }
 }
