@@ -34,7 +34,19 @@ public class Main {
         Thread threadTempo = new Thread(tempoPartita);
         threadTempo.start();
 
-        // Interazione con l'arbitro
+        // Creazione e avvio dei thread per i giocatori delle squadre
+        for(Giocatore giocatore : squadra1.getArrayGiocatori()) {
+            Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true));
+            threadGiocatore.start();
+        }
+
+        for (Giocatore giocatore : squadra2.getArrayGiocatori()) {
+            Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true));
+            threadGiocatore.start();
+        }
+
+        // Interazione con l'arbitro e gestione delle azioni durante la partita
+
         boolean partitaInCorso = true;
         while (partitaInCorso) {
             System.out.println("Seleziona un'azione per l'arbitro:");
@@ -115,22 +127,11 @@ public class Main {
                     System.out.println("Scelta non valida, riprova.");
                     break;
 
-                for(Giocatore giocatore : squadra1.getArrayGiocatori()) {
-                    Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true));
-                    threadGiocatore.start();
-                }
-
-                for (Giocatore giocatore : squadra2.getArrayGiocatori()) {
-                    Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true));
-                    threadGiocatore.start();
-                }
-
-                // Altri processi e attività durante la partita
             }
+
+            // Altre operazioni e logiche di fine partita
+
+            scanner.close(); // Chiudi lo scanner alla fine dell'utilizzo
         }
-
-        // Altre operazioni e logiche di fine partita
-
-        scanner.close(); // Chiudi lo scanner alla fine dell'utilizzo
     }
 }
