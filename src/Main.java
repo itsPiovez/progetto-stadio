@@ -47,7 +47,8 @@ public class Main {
         // Interazione con l'arbitro e gestione delle azioni durante la partita
 
         boolean partitaInCorso = true;
-        while (partitaInCorso) {
+        if (partitaInCorso) {
+            partitaInCorso = false;
             System.out.println("Seleziona un'azione per l'arbitro:");
             System.out.println("1. Assegna un cartellino");
             System.out.println("2. Effettua una sostituzione");
@@ -74,10 +75,10 @@ public class Main {
 
                     int sceltaGiocatore = scanner.nextInt();
                     scanner.nextLine(); // Consuma il newline
-
                     Giocatore giocatoreSelezionato = squadraSelezionata.getGiocatore(sceltaGiocatore - 1);
-
                     arbitro.assegnaCartellino(giocatoreSelezionato);
+                    partitaInCorso = true;
+
                     break;
                 case 2:
                     System.out.println("Seleziona la squadra da cui vuoi fare la sostituzione:");
@@ -85,7 +86,6 @@ public class Main {
                     System.out.println("2. " + squadra2.getNome());
                     int squadraSostituzione = scanner.nextInt();
                     scanner.nextLine(); // Consuma il newline
-
                     Squadra squadraDaCuiSostituire = (squadraSostituzione == 1) ? squadra1 : squadra2;
 
                     System.out.println("Scegli il giocatore da far uscire:");
@@ -118,6 +118,7 @@ public class Main {
                     Giocatore giocatoreEntrata = squadraInCuiSostituire.getGiocatore(nuovoGiocatore - 1);
 
                     arbitro.effettuaSostituzione(giocatoreUscita, giocatoreEntrata);
+                    partitaInCorso = true;
                     break;
                 case 3:
                     partitaInCorso = false;
@@ -127,7 +128,6 @@ public class Main {
                     break;
 
             }
-
             // Altre operazioni e logiche di fine partita
 
             scanner.close(); // Chiudi lo scanner alla fine dell'utilizzo

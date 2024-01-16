@@ -10,7 +10,7 @@ class Tempo implements Runnable {
         while (tempo > 0) {
             // Implementazione per gestire il tempo della partita
             try {
-                Thread.sleep(1000); // Attendi un secondo
+                Thread.sleep(5000); // Attendi un secondo
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

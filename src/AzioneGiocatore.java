@@ -16,11 +16,10 @@ class AzioneGiocatore implements Runnable {
 
     @Override
     public void run() {
-        while (partitaInCorso) {
+        while(partitaInCorso = true) {
             eseguiAzioneCasuale();
             try {
-                Thread.sleep(5000); // Attendi un secondo tra un'azione e l'altra
-
+                Thread.sleep(10000); // Attendi un secondo tra un'azione e l'altra
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -28,10 +27,10 @@ class AzioneGiocatore implements Runnable {
     }
 
     synchronized private void eseguiAzioneCasuale() {
+        partitaInCorso = false;
         // Implementazione di un'azione casuale del giocatore
         Random random = new Random();
         int valoreCasuale = random.nextInt(100) + 1; // Genera un numero tra 1 e 100
-
         if (valoreCasuale <= 25) {
             eseguiPassaggio();
         } else if (valoreCasuale <= 50) {
@@ -59,7 +58,7 @@ class AzioneGiocatore implements Runnable {
                 if (sceltaAmmonizione == 1) {
                     arbitro.assegnaCartellino(giocatore);
                 } else {
-                    // Azione alternativa o lascia vuoto se non vuoi fare nulla in caso di mancata ammonizione
+                   partitaInCorso= true;
                 }
             } else {
                 // Azione alternativa o lascia vuoto se non vuoi fare nulla in caso di mancato fallo
@@ -68,7 +67,8 @@ class AzioneGiocatore implements Runnable {
     }
 
     private void eseguiPassaggio() {
-        System.out.println(giocatore.getNome() + "della squadra " + giocatore.getNomeSquadra() + " sta eseguendo un passaggio.");
+        partitaInCorso = false;
+        System.out.println(giocatore.getNome() + " della squadra " + giocatore.getNomeSquadra() + " sta eseguendo un passaggio.");
 
         // Genera un numero casuale tra 1 e 100
         int probabilitaSuccesso = 80; // Modifica questo valore in base alla probabilità desiderata
@@ -84,15 +84,19 @@ class AzioneGiocatore implements Runnable {
             System.out.println("Il passaggio non va a buon fine. La palla è stata intercettata.");
             // Aggiungi qui la logica specifica per la perdita della palla
         }
+        partitaInCorso = true;
     }
 
 
     private void eseguiDifesa() {
+        partitaInCorso = false;
         System.out.println(giocatore.getNome() + " sta eseguendo un tackle.");
         // Aggiungi la logica specifica per una difesa
+        partitaInCorso = true;
     }
 
     private void eseguiTiro() {
+        partitaInCorso = false;
         System.out.println(giocatore.getNome() + " della squadra " + giocatore.getNomeSquadra() + " sta eseguendo un tiro.");
 
         // Genera un numero casuale tra 1 e 100
@@ -104,15 +108,16 @@ class AzioneGiocatore implements Runnable {
             // Il tiro è un successo (produzione gol)
             System.out.println("GOOOOOOOL!");
             arbitro.assegnaGoal(giocatore);
-
             // Fai una pausa e chiedi se continuare
             pausaEChiediContinuare();
         } else {
             // Il tiro non va a buon fine (perdita palla)
             System.out.println("Il tiro non va a buon fine. Il pallone è stato intercettato.");
         }
+        partitaInCorso = true;
     }
     private void pausaEChiediContinuare() {
+        partitaInCorso = false; // Ferma la partita
         // Fai una pausa e chiedi all'utente se vuole continuare la partita
         System.out.println("La partita si ferma. Vuoi continuare?");
         System.out.println("1. Sì");
@@ -120,13 +125,15 @@ class AzioneGiocatore implements Runnable {
 
         int sceltaContinua = scanner.nextInt();
         scanner.nextLine();  // Consuma il newline
-
-        if (sceltaContinua != 1) {
+        if (sceltaContinua == 1) {
+            // L'utente ha scelto di continuare, puoi riprendere la partita
+            System.out.println("La partita riprende.");
+            partitaInCorso = true;
+        }
+        if (sceltaContinua == 2) {
             // L'utente ha scelto di non continuare, puoi terminare il gioco o fare altre operazioni
             System.out.println("La partita è terminata.");
             partitaInCorso = false;
         }
     }
-
-
 }
