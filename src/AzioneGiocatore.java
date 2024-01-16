@@ -3,12 +3,14 @@ import java.util.Random;
 class AzioneGiocatore implements Runnable {
     private Giocatore giocatore;
     private boolean partitaInCorso;
+    private Tempo tempo;
     private Arbitro arbitro;  // Aggiungi un attributo Arbitro
 
-    public AzioneGiocatore(Giocatore giocatore, boolean partitaInCorso, Arbitro arbitro) {
+    public AzioneGiocatore(Giocatore giocatore, boolean partitaInCorso, Arbitro arbitro,Tempo tempo) {
         this.giocatore = giocatore;
         this.partitaInCorso = partitaInCorso;
         this.arbitro= arbitro;
+        this.tempo=tempo;
 
     }
 
@@ -38,7 +40,7 @@ class AzioneGiocatore implements Runnable {
             eseguiTiro();
         } else {
             // Il giocatore ha fatto fallo
-            System.out.println(giocatore.getNome() + " ha fatto fallo.");
+            System.out.println(giocatore.getNome() + " ha fatto fallo."+"al minuto "+Tempo.tempoAttuale);
 
             // Riduci la probabilità di fare fallo, ad esempio, a 10%
             int probabilitaFallo = 10;
@@ -54,7 +56,7 @@ class AzioneGiocatore implements Runnable {
 
 
     private void eseguiPassaggio() {
-        System.out.println(giocatore.getNome() + " sta eseguendo un passaggio.");
+        System.out.println(giocatore.getNome() + " sta eseguendo un passaggio."+"al minuto "+Tempo.tempoAttuale);
 
         // Genera un numero casuale tra 1 e 100
         int probabilitaSuccesso = 80; // Modifica questo valore in base alla probabilità desiderata
@@ -67,19 +69,19 @@ class AzioneGiocatore implements Runnable {
             // Aggiungi qui la logica specifica per un passaggio riuscito
         } else {
             // Il passaggio non va a buon fine (perdita palla)
-            System.out.println("Il passaggio non va a buon fine. La palla è stata intercettata.");
+            System.out.println("Il passaggio non va a buon fine. La palla è stata intercettata."+"al minuto "+Tempo.tempoAttuale);
             // Aggiungi qui la logica specifica per la perdita della palla
         }
     }
 
 
     private void eseguiDifesa() {
-        System.out.println(giocatore.getNome() + " sta eseguendo un tackle.");
+        System.out.println(giocatore.getNome() + " sta eseguendo un tackle."+"al minuto "+Tempo.tempoAttuale);
         // Aggiungi la logica specifica per una difesa
     }
 
     private void eseguiTiro() {
-        System.out.println(giocatore.getNome() + " sta eseguendo un tiro.");
+        System.out.println(giocatore.getNome() + " sta eseguendo un tiro."+"al minuto "+Tempo.tempoAttuale);
 
         // Genera un numero casuale tra 1 e 100
         int probabilitaSuccesso = 30; // Modifica questo valore in base alla probabilità desiderata
@@ -92,7 +94,7 @@ class AzioneGiocatore implements Runnable {
             // Aggiungi qui la logica specifica per un gol
         } else {
             // Il tiro non va a buon fine (perdita palla)
-            System.out.println("Il tiro non va a buon fine. Il pallone è stato intercettato.");
+            System.out.println("Il tiro non va a buon fine. Il pallone è stato intercettato."+"al minuto "+Tempo.tempoAttuale);
             // Aggiungi qui la logica specifica per la perdita della palla
         }
     }
