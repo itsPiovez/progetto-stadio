@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Arbitro arbitro = new Arbitro("Nome Arbitro");
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Inserisci il nome della squadra 1: ");
@@ -14,7 +13,7 @@ public class Main {
         for (int i = 0; i < 11; i++) {
             System.out.print("Inserisci il nome del giocatore " + (i + 1) + " della squadra " + nomeSquadra1 + ": ");
             String nomeGiocatore = scanner.nextLine();
-            Giocatore giocatore = new Giocatore(i + 1, nomeGiocatore, nomeSquadra1);
+            Giocatore giocatore = new Giocatore(i + 1, nomeGiocatore, nomeSquadra1, squadra1);
             squadra1.aggiungiGiocatore(giocatore);
         }
 
@@ -26,11 +25,11 @@ public class Main {
         for (int i = 0; i < 11; i++) {
             System.out.print("Inserisci il nome del giocatore " + (i + 1) + " della squadra " + nomeSquadra2 + ": ");
             String nomeGiocatore = scanner.nextLine();
-            Giocatore giocatore = new Giocatore(i + 1, nomeGiocatore, nomeSquadra2);
+            Giocatore giocatore = new Giocatore(i + 1, nomeGiocatore, nomeSquadra2, squadra2);
             squadra2.aggiungiGiocatore(giocatore);
         }
 
-        Tempo tempoPartita = new Tempo(90); // 90 minuti di gioco
+        Tempo tempoPartita = new Tempo(1); // 90 minuti di gioco
         Thread threadTempo = new Thread(tempoPartita);
         threadTempo.start();
 

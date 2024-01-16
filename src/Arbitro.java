@@ -26,4 +26,11 @@ class Arbitro {
         // Restituisce la squadra del giocatore, null se non trova la squadra
         return null;
     }
+
+    public void assegnaGoal(Giocatore giocatore) {
+        Squadra squadraDelGiocatore = giocatore.getSquadra();  // Ottenere la squadra del giocatore
+        squadraDelGiocatore.incrementaPunteggio();  // Aggiornare il punteggio della squadra
+        System.out.println("Goal! " + giocatore.getNome() + " ha segnato per la squadra " + squadraDelGiocatore.getNome());
+    }
+
 }

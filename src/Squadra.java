@@ -5,11 +5,13 @@ class Squadra {
     private List<Giocatore> arrayGiocatori;
     private String nome;
     private int numeroGiocatoriTot;
+    private int punteggio;
 
     public Squadra(String nome, int numeroGiocatoriTot) {
         this.nome = nome;
         this.numeroGiocatoriTot = numeroGiocatoriTot;
         this.arrayGiocatori = new ArrayList<>(); // Inizializza l'array dei giocatori
+        this.punteggio = 0;  // Inizializza il punteggio a zero
     }
 
     public void sostituisciGiocatore(Giocatore uscente, Giocatore entrante) {
@@ -53,6 +55,9 @@ class Squadra {
 
     public Giocatore[] getArrayGiocatori() {
         return arrayGiocatori.toArray(new Giocatore[0]);
+    }
+    public void incrementaPunteggio() {
+        this.punteggio++;
     }
 
     // Altri metodi per gestire la squadra
