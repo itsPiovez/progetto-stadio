@@ -6,12 +6,15 @@ class Giocatore {
     private String nomeMaglia;
     private String nomeSquadra;
     private int cartellini;
+    private Squadra squadra;  // Aggiungi un campo Squadra
 
-    public Giocatore(int id, String nomeMaglia, String nomeSquadra) {
+    public Giocatore(int id, String nomeMaglia, String nomeSquadra, Squadra squadra) {
         this.id = id;
         this.nomeMaglia = nomeMaglia;
         this.nomeSquadra = nomeSquadra;
         this.cartellini = 0;
+        this.squadra = squadra;  // Inizializza il campo squadra
+
     }
 
     public int getId() {
@@ -35,5 +38,9 @@ class Giocatore {
     }
     public String getNomeSquadra() {
         return nomeSquadra;
+    }
+
+    public Squadra getSquadra() {
+        return this.squadra; // Restituisce l'oggetto Squadra associato al giocatore
     }
 }
