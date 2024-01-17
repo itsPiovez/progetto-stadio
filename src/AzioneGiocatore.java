@@ -5,7 +5,6 @@ class AzioneGiocatore implements Runnable {
     private boolean partitaInCorso;
     private Arbitro arbitro;  // Aggiungi un attributo Arbitro
     private Tempo tempoPartita;  // Aggiungi un attributo Tempo
-
     public AzioneGiocatore(Giocatore giocatore, boolean partitaInCorso, Arbitro arbitro,Tempo tempoPartita) {
         this.giocatore = giocatore;
         this.partitaInCorso = partitaInCorso;
@@ -13,7 +12,6 @@ class AzioneGiocatore implements Runnable {
         this.tempoPartita=tempoPartita;
 
     }
-
     @Override
     public void run() {
         while (partitaInCorso) {
