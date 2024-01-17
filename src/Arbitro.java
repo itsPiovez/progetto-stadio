@@ -5,8 +5,14 @@ class Arbitro {
         this.nome = nome;
     }
 
-    public synchronized void assegnaCartellino(Giocatore giocatore) {
+    public synchronized void assegnaCartellinoGiallo(Giocatore giocatore) {
         giocatore.incrementaCartellini(); // Incrementa il numero di cartellini del giocatore
+        System.out.println("Cartellino assegnato a " + giocatore.getNome() + " della squadra " + giocatore.getNomeSquadra());
+        // Altre operazioni relative all'assegnazione del cartellino
+    }
+    public synchronized void assegnaCartellinoRosso(Giocatore giocatore) {
+        giocatore.incrementaCartellini();
+        giocatore.incrementaCartellini();
         System.out.println("Cartellino assegnato a " + giocatore.getNome() + " della squadra " + giocatore.getNomeSquadra());
         // Altre operazioni relative all'assegnazione del cartellino
     }
@@ -27,10 +33,9 @@ class Arbitro {
         return null;
     }
 
-    public void assegnaGoal(Giocatore giocatore) {
-        Squadra squadraDelGiocatore = giocatore.getSquadra();  // Ottenere la squadra del giocatore
-        squadraDelGiocatore.incrementaPunteggio();  // Aggiornare il punteggio della squadra
-        System.out.println("Goal! " + giocatore.getNome() + " ha segnato per la squadra " + squadraDelGiocatore.getNome());
+    public void assegnaGoal(Giocatore giocatore, Squadra squadra) {
+        squadra.incrementaPunteggio();
+        System.out.println("Goal! " + giocatore.getNome() + " ha segnato per la squadra " + squadra.getNome());
     }
 
 }

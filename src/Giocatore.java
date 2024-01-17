@@ -16,23 +16,18 @@ class Giocatore {
         this.squadra = squadra;  // Inizializza il campo squadra
 
     }
-
     public int getId() {
         return id;
     }
-
     public String getNomeMaglia() {
         return nomeMaglia;
     }
-
     public String getNome() {
         return nomeMaglia;
     }
-
     public int incrementaCartellini() {
         return ++cartellini;
     }
-
     public int getCartellini() {
         return cartellini;
     }

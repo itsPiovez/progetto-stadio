@@ -60,5 +60,9 @@ class Squadra {
         this.punteggio++;
     }
 
+    public int getPunteggio() {
+        return punteggio;
+    }
+
     // Altri metodi per gestire la squadra
 }
