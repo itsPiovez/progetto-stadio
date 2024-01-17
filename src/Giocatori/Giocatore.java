@@ -1,3 +1,5 @@
+package Giocatori;
+import Spogliatoi.SpogliatoioGiocatori;
 public class Giocatore extends Thread{
     private String nome;
     private int numeroMaglia; //numero di maglia dei giocatori
@@ -16,3 +18,4 @@ public class Giocatore extends Thread{
 
     }
 }
+

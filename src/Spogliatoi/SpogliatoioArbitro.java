@@ -1,10 +1,15 @@
+package Spogliatoi;
+import Personale.Arbitro;
+import Personale.Assistenti;
+import Personale.Guardialinee;
+
 import java.util.ArrayList;
 
 public class  SpogliatoioArbitro extends Thread{
     private Arbitro arbitro;
     private ArrayList<Assistenti>assistenti;
     private ArrayList<Guardialinee>guardialinee;
-    public SpogliatoioArbitro(Arbitro arbitro,ArrayList<Assistenti>assistenti,ArrayList<Guardialinee>guardialinee){
+    public SpogliatoioArbitro(Arbitro arbitro, ArrayList<Assistenti>assistenti, ArrayList<Guardialinee>guardialinee){
         this.guardialinee=guardialinee;
         this.arbitro = arbitro;
         this.assistenti=assistenti;
@@ -36,3 +41,4 @@ public class  SpogliatoioArbitro extends Thread{
 
     }
 }
+

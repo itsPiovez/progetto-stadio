@@ -1,3 +1,5 @@
+package Merch;
+
 public class Merch {
     private String type;
     private String size;
@@ -38,3 +40,4 @@ public class Merch {
         return color;
     }
 }
+
