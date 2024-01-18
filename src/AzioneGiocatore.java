@@ -106,6 +106,7 @@ class AzioneGiocatore extends Thread {
     }
 
     private void eseguiTiro() throws InterruptedException {
+
         partitaInCorso = false;
         Thread.sleep(10000);
         System.out.println(giocatore.getNome() + " della squadra " + giocatore.getNomeSquadra() + " sta eseguendo un tiro.");
@@ -115,16 +116,22 @@ class AzioneGiocatore extends Thread {
         int valoreCasuale = random.nextInt(100) + 1;
         if (valoreCasuale <= probabilitaSuccesso) {
             // Il tiro è un successo (produzione gol)
+
             System.out.println("GOOOOOOOL!");
+            System.out.println("I tifosi sono in delirio!");
+
             arbitro.assegnaGoal(giocatore, giocatore.getSquadra());
             Thread.sleep(10000);
-            // Fai una pausa e chiedi se continuar
         } else {
             // Il tiro non va a buon fine (perdita palla)
             System.out.println("Il tiro non va a buon fine. Il pallone è stato intercettato.");
         }
         partitaInCorso = true;
     }
+
+
+    }
+
     /*private void pausaEChiediContinuare() {
         partitaInCorso = false; // Ferma la partita
         // Fai una pausa e chiedi all'utente se vuole continuare la partita
