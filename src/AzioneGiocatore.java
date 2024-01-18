@@ -151,4 +151,3 @@ class AzioneGiocatore extends Thread {
             System.out.println("La partita è terminata.");
             partitaInCorso = false;
         }*/
-    }
