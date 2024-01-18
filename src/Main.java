@@ -31,12 +31,12 @@ public class Main {
 
         // Creazione e avvio dei thread per i giocatori delle squadre
         for(Giocatore giocatore : squadra1.getArrayGiocatori()) {
-            Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true, arbitro));
+            Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true, arbitro,tempoPartita));
             threadGiocatore.start();
         }
 
         for (Giocatore giocatore : squadra2.getArrayGiocatori()) {
-            Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true, arbitro));
+            Thread threadGiocatore = new Thread(new AzioneGiocatore(giocatore, true, arbitro,tempoPartita));
             threadGiocatore.start();
         }
         // Fai vedere il punteggio di tutte e due le squadre
