@@ -3,6 +3,8 @@ import Bagni.*;
 import Ristorante.*;
 import Merch.*;
 import Bar.*;
+import Ristorante.Main;
+
 import java.util.Random;
 
 class AzioneTifoso extends Thread {
@@ -20,13 +22,31 @@ class AzioneTifoso extends Thread {
             attendiIntervalloCasuale();
         }
     }
-    private int percentualeAzioneCasuale() {
+    public static void main(String[] args) {
+        new AzioneTifoso("Tifoso 1").start();
+        new AzioneTifoso("Tifoso 2").start();
+        new AzioneTifoso("Tifoso 3").start();
+    }
 
-        return 7; // 7 azioni possibili
+    private static int generaNumeroConProbabilitaPersonalizzate(double[] probabilita) {
+        Random random = new Random();
+        double scelta = random.nextDouble();
+        double accumulato = 0;
+
+        // Itera attraverso le probabilità per decidere il numero da generare
+        for (int i = 0; i < probabilita.length; i++) {
+            accumulato += probabilita[i];
+            if (scelta <= accumulato) {
+                return i; // Restituisce il numero corrispondente alla probabilità raggiunta
+            }
+        }
+
+        // In caso di problemi (es. somma delle probabilità non 1), restituisce -1 o gestisci l'errore in altro modo
+        return -1;
     }
 
     private void eseguiAzioneCasuale() {
-        int azioneCasuale = random.nextInt(percentualeAzioneCasuale());
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
 
         switch (azioneCasuale) {
             case 0:
@@ -68,12 +88,11 @@ class AzioneTifoso extends Thread {
         try {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
             // collego la classe merch
-            Persona p = new Persona("uomo",1);
-            Bagni.MainBagni.c.push(p);
+            MerchShop merchShop = MerchShop.getInstance();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(nomeTifoso + " è tornato dal ristorante.");
+        System.out.println(nomeTifoso + " è tornato dal merch.");
     }
     private void andareRistorante() {
         System.out.println(nomeTifoso + " sta andando al ristorante.");
@@ -81,8 +100,8 @@ class AzioneTifoso extends Thread {
         try {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
             // collego la classe ristorante
-            Persona p = new Persona("uomo",1);
-            Bagni.MainBagni.c.push(p);
+            Ristorante.Cliente c = new Ristorante.Cliente("uomo",Main.tavoli,Main.coda,Main.menu);
+            Ristorante.Main.coda.push(c);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -108,6 +127,9 @@ class AzioneTifoso extends Thread {
         // Simula il tempo trascorso al bar
         try {
             Thread.sleep(random.nextInt(3000) + 1000); // Attendi tra 1 e 4 secondi
+            Bar bar = Bar.getInstance();
+            ClienteBar cliente = new ClienteBar(nomeTifoso, bar);
+            new Thread(cliente).start();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -116,7 +138,7 @@ class AzioneTifoso extends Thread {
 
     private void attendiIntervalloCasuale() {
         try {
-            Thread.sleep(random.nextInt(2000) + 5000); // Attendi tra 5 e 7 secondi
+            Thread.sleep(random.nextInt(2000) + 10000); // Attendi tra 5 e 7 secondi
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

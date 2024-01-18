@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-class Bar {
+public class Bar {
     private boolean aperto = false;
+    private static Bar instance = null;
+
     private List<String> menu = new ArrayList<>();
     private Object monitor = new Object();
 
@@ -17,6 +19,12 @@ class Bar {
         menu.add("Panino");
         menu.add("Coca-Cola");
         menu.add("Patatine");
+    }
+    public static Bar getInstance() {
+        if (instance == null) {
+            instance = new Bar();
+        }
+        return instance;
     }
 
     public List<String> getMenu() {

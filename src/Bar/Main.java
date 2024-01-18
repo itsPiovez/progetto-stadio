@@ -14,7 +14,7 @@ public class Main {
             ExecutorService executorService = Executors.newCachedThreadPool();
 
             for (int i = 1; i <= 10; i++) {
-                executorService.execute(new Cliente("Cliente" + i, bar));
+                executorService.execute(new ClienteBar("Cliente" + i, bar));
                 try {
                     Thread.sleep(1000); // Aggiungi un ritardo tra i clienti
                 } catch (InterruptedException e) {

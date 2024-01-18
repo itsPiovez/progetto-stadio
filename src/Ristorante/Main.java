@@ -7,10 +7,12 @@ import java.util.LinkedList;
 
 
 public class Main {
+    public static Ristorante.Coda<Ristorante.Cliente> coda = new Ristorante.Coda<>();
+    public static List<Ristorante.Tavolo> tavoli = new ArrayList<>();
+    public static Ristorante.Menu menu = new Ristorante.Menu();
+
+
     public static void main(String[] args) {
-        Ristorante.Coda<Ristorante.Cliente> coda = new Ristorante.Coda<>();
-        Ristorante.Menu menu = new Ristorante.Menu();
-        List<Ristorante.Tavolo> tavoli = new ArrayList<>();
         List<Ristorante.Cameriere> camerieri = new ArrayList<>();
         List<Ristorante.Cuoco> cuochi = new ArrayList<>();
         final int numClients = 100;  // Rendi la variabile finale

@@ -2,11 +2,11 @@ package Bar;
 
 import java.util.List;
 
-public class Cliente implements Runnable {
+public class ClienteBar implements Runnable {
     private String nome;
     private Bar bar;
 
-    public Cliente(String nome, Bar bar) {
+    public ClienteBar(String nome, Bar bar) {
         this.nome = nome;
         this.bar = bar;
     }

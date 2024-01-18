@@ -77,6 +77,10 @@ public class Menu {
         tempiDiPreparazione.put("Acqua", 500);
         // Aggiungi altri piatti e tempi di preparazione secondo necessità
     }
+    public Map<String, Double> getPiatti() {
+        return piatti;
+    }
+
 
     public Double getPrezzo(String piatto) {
         return piatti.getOrDefault(piatto, 0.0);
