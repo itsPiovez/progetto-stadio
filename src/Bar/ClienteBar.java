@@ -1,25 +1,23 @@
 package Bar;
-import java.util.List;
-
-public class ClienteBar extends Tifoso implements Runnable {
+public class ClienteBar implements Runnable {
     private String nome;
     private Bar bar;
 
     public ClienteBar(String nome, Bar bar) {
-        super(nome);
         this.nome = nome;
         this.bar = bar;
+    }
+    public Bar getBar() {
+        return bar;
     }
 
     @Override
     public void run() {
         // I clienti scelgono casualmente dall'intero menu
-        List<String> menu = bar.getMenu();
-        int randomIndex = (int) (Math.random() * menu.size());
-        String ordine = menu.get(randomIndex);
+        Coda<String> menu = bar.getMenu();
+        String ordine = menu.pop();
 
         // Ogni cliente esegue l'ordine e il consumo in un thread separato
         bar.servireCliente(nome, ordine);
     }
 }
-

@@ -1,6 +1,6 @@
 package Ristorante;
 
-import Bar.Tifoso;
+import Azioni.Tifoso;
 
 import java.util.ArrayList;
 import java.util.List;

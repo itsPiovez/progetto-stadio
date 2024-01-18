@@ -1,33 +1,26 @@
 package Bar;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class Bar {
-    private boolean aperto = false;
-    private static Bar instance = null;
-
-    private List<String> menu = new ArrayList<>();
-    private Object monitor = new Object();
-
-    public Bar() {
-        // Aggiungi alcuni elementi al menu
-        menu.add("Birra");
-        menu.add("Acqua");
-        menu.add("Panino");
-        menu.add("Coca-Cola");
-        menu.add("Patatine");
-    }
+    private static Bar instance;
     public static Bar getInstance() {
         if (instance == null) {
-            instance = new Bar();
+            instance = new Bar(menu);
         }
         return instance;
     }
+    private boolean aperto = false;
+    private Object monitor = new Object();
+    public static Coda<String> menu = new Coda<String>();
+    public Bar(Coda<String> menu) {
+        this.menu = menu;
+        // Aggiungi alcuni elementi al menu
+        menu.push("Birra");
+        menu.push("Acqua");
+        menu.push("Panino");
+        menu.push("Coca-Cola");
+        menu.push("Patatine");
+    }
 
-    public List<String> getMenu() {
+    public Coda<String> getMenu() {
         return menu;
     }
 
@@ -56,7 +49,7 @@ public class Bar {
 
         System.out.println("Benvenuto, " + cliente + "! Il bar è aperto.");
 
-        if (getMenu().contains(ordine)) {
+        if (!menu.isEmpty() && menu.pop().equals(ordine)) {
             System.out.println("Servendo " + ordine + " a " + cliente + ".");
             consumaOrdine(cliente, ordine);
         } else {
@@ -79,9 +72,7 @@ public class Bar {
             e.printStackTrace();
         }
     }
-
     public Object getMonitor() {
         return monitor;
     }
 }
-
