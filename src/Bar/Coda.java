@@ -1,48 +1,26 @@
 package Bar;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Coda<T> {
-    private LinkedList<T> list;
-    private boolean isFinished = false;
-
+    private List<T> list;
 
     public Coda() {
-        list = new LinkedList<T>();
+        list = new ArrayList<>();
     }
-
-    public T pop() {
-        while (list.isEmpty() && isFinished) {
-            try {
-                Thread.sleep(10);
-                System.out.println("dc");
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();  // Ripristina l'interruzione
-            }
-        }
-        return list.isEmpty() ? null : this.estrai();
-    }
-
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-    public void setFinished() {
-        isFinished = !isFinished;
-    }
-    // Restituisce la dimensione della lista (numero di persone in coda)
-    public synchronized int lenght() {
+    public int lenght() {
         return list.size();
     }
-
-    public boolean isFinished() {
-        return isFinished;
-    }
-
-    private synchronized T estrai() {
-        return list.removeFirst();
+    public synchronized T pop() {
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.remove(0);
     }
 
     public synchronized void push(T element) {
-        list.addLast(element);
+        list.add(element);
     }
 }

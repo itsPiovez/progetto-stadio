@@ -3,6 +3,7 @@ import Bagni.*;
 import Ristorante.*;
 import Merch.*;
 import Bar.*;
+import Ristorante.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,9 @@ public class AzioneTifoso extends Thread {
     }
 
     private void eseguiAzioneCasuale() {
-        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
-        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0});  prova ristorante
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
 
         switch (azioneCasuale) {
             case 0:
@@ -115,8 +117,10 @@ public class AzioneTifoso extends Thread {
 
         try {
             Thread.sleep((new Random().nextInt(3000) + 1000));
-            ClienteBar cliente = new ClienteBar(nomeTifoso,Bar.getInstance());
-            new Thread(cliente).start();
+            Bar.BarCreazione d = new BarCreazione();
+            Bar.Cliente c = new Bar.Cliente("Tifoso", Bar.BarCreazione.coda,BarCreazione.menu);
+            Bar.BarCreazione.coda.push(c);
+            c.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
