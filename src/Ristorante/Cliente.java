@@ -1,10 +1,12 @@
 package Ristorante;
 
+import Bar.Tifoso;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Cliente implements Runnable {
+public class Cliente extends Tifoso implements Runnable {
     private String nome;
     private double totale=0;
     private List<Tavolo> tavoli;
@@ -12,7 +14,7 @@ public class Cliente implements Runnable {
     private Menu menu;
 
     public Cliente(String nome, List<Ristorante.Tavolo> tavoli, Ristorante.Coda<Ristorante.Cliente> coda,Menu m) {
-        this.nome = nome;
+        super(nome);
         this.tavoli = tavoli;
         this.coda = coda;
         this.menu=m;

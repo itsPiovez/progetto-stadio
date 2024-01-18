@@ -3,11 +3,12 @@ import Bagni.*;
 import Ristorante.*;
 import Merch.*;
 import Bar.*;
-import Ristorante.Main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-class AzioneTifoso extends Thread {
+public class AzioneTifoso extends Thread {
     private String nomeTifoso;
     private Random random = new Random();
 
@@ -22,11 +23,7 @@ class AzioneTifoso extends Thread {
             attendiIntervalloCasuale();
         }
     }
-    public static void main(String[] args) {
-        new AzioneTifoso("Tifoso 1").start();
-        new AzioneTifoso("Tifoso 2").start();
-        new AzioneTifoso("Tifoso 3").start();
-    }
+    /*se voglio provare questa classe tolgo le virgolette*/
 
     private static int generaNumeroConProbabilitaPersonalizzate(double[] probabilita) {
         Random random = new Random();
@@ -82,26 +79,15 @@ class AzioneTifoso extends Thread {
             // Aggiungi altri casi a seconda delle azioni possibili
         }
     }
-    private void andareAlMerch() {
-        System.out.println(nomeTifoso + " sta andando al merch.");
-        // Simula il tempo trascorso per andare al merch
-        try {
-            Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
-            // collego la classe merch
-            MerchShop merchShop = MerchShop.getInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(nomeTifoso + " è tornato dal merch.");
-    }
     private void andareRistorante() {
         System.out.println(nomeTifoso + " sta andando al ristorante.");
         // Simula il tempo trascorso per andare al ristorante
         try {
-            Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
+            Thread.sleep(random.nextInt(4000) + 6000); // Attendi tra 1 e 4 secondi
             // collego la classe ristorante
-            Ristorante.Cliente c = new Ristorante.Cliente("uomo",Main.tavoli,Main.coda,Main.menu);
-            Ristorante.Main.coda.push(c);
+            Ristorante.Cliente c = new Ristorante.Cliente("uomo",RistoranteCreazione.tavoli,RistoranteCreazione.coda,RistoranteCreazione.menu);
+            Ristorante.RistoranteCreazione.coda.push(c);
+            c.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -110,19 +96,21 @@ class AzioneTifoso extends Thread {
 
     private void andareInBagno() {
         System.out.println(nomeTifoso + " sta andando in bagno.");
+        Random random = new Random();
         // Simula il tempo trascorso in bagno
         try {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
             // collego la classe bagno
-            Persona p = new Persona("uomo",1);
-            Bagni.MainBagni.c.push(p);
+            String sesso = random.nextBoolean() ? "uomo" : "donna";
+            Persona p = new Persona(sesso, (int) this.getId());
+            Bagni.Bagno.c.push(p);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(nomeTifoso + " è tornato dal bagno.");
     }
 
-    private void andareAlBar() {
+    private void andareAlBar() {   //manca da finire
         System.out.println(nomeTifoso + " sta andando al bar.");
         // Simula il tempo trascorso al bar
         try {
@@ -134,6 +122,18 @@ class AzioneTifoso extends Thread {
             e.printStackTrace();
         }
         System.out.println(nomeTifoso + " è tornato dal bar.");
+    }
+    private void andareAlMerch() {//manca da finire
+        System.out.println(nomeTifoso + " sta andando al merch.");
+        // Simula il tempo trascorso per andare al merch
+        try {
+            Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
+            // collego la classe merch
+            //MerchShop merchShop = MerchShop.getInstance();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(nomeTifoso + " è tornato dal merch.");
     }
 
     private void attendiIntervalloCasuale() {

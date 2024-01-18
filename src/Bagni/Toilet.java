@@ -63,7 +63,7 @@ public void usa_bagno(String TID, Random r) {
         }
         System.out.println("La Persona " + TID + " sta uscendo dal bagno per " + tipo);
 
-        if (visitatori > 3) {
+        if (visitatori > 40) {
             pulito = false;
             pulisci(this);
         }

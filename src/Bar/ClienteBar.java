@@ -1,12 +1,12 @@
 package Bar;
-
 import java.util.List;
 
-public class ClienteBar implements Runnable {
+public class ClienteBar extends Tifoso implements Runnable {
     private String nome;
     private Bar bar;
 
     public ClienteBar(String nome, Bar bar) {
+        super(nome);
         this.nome = nome;
         this.bar = bar;
     }

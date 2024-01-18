@@ -1,4 +1,5 @@
-public class Tifoso extends Thread{
+package Bar;
+public class Tifoso{
     private String nome;
     public Tifoso(String nome){
         this.nome=nome;

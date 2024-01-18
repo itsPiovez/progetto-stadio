@@ -11,15 +11,12 @@ import java.util.Random;
 public class Bagno extends Thread {
     private List<Toilet> donne;
     private List<Toilet> uomini;
-    private int id;
-    private Coda<Persona> c;
+    public static Coda<Persona> c = new Coda<Persona>(); //creo coda per i bagni
     Random m = new Random();
 
-    public Bagno(List<Toilet> donne, List<Toilet> uomini, int id, Coda<Persona> c) {
+    public Bagno(List<Toilet> donne, List<Toilet> uomini) {
         this.donne = donne;
         this.uomini = uomini;
-        this.id = id;
-        this.c = c;
     }
 
     private synchronized Persona estrai() {
@@ -38,6 +35,14 @@ public class Bagno extends Thread {
 
     @Override
     public void run() {
+        while(true){
+        while(c.isEmpty()){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         while (!c.isEmpty() || !c.isFinished()) {
             Persona p = estrai();
             if (p == null) {
@@ -54,6 +59,7 @@ public class Bagno extends Thread {
             } catch (Exception e) {
                 System.err.println("Error starting thread: " + e.getMessage());
             }
+        }
         }
     }
 }
