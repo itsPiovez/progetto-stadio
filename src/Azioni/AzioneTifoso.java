@@ -132,7 +132,9 @@ public class AzioneTifoso extends Thread {
             // collego la classe merch
             MerchShop merchShop = new MerchShop();
             merchShop.Apertura();
-            //Clienti c = new Clienti(merchShop);
+            ClientiMerch c = new ClientiMerch((int) this.getId(), merchShop);
+            Merch.Cliente.add(c);
+            c.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
