@@ -129,7 +129,6 @@ class AzioneGiocatore extends Thread {
         partitaInCorso = true;
     }
 
-
     }
 
     /*private void pausaEChiediContinuare() {
