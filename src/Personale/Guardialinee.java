@@ -1,3 +1,5 @@
+package Personale;
+import Spogliatoi.SpogliatoioArbitro;
 public class Guardialinee extends Thread{
     private String nome;
     public Guardialinee(String nome){
