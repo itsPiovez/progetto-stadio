@@ -1,17 +1,17 @@
 package GestionePrezzi;
 
 public class PrezzoStrategyFactory {
-     private static PrezzoStrategyFactory factory;
-     
-     private PrezzoStrategyFactory(){};
-     
-     public static PrezzoStrategyFactory getInstance(){
+    private static PrezzoStrategyFactory factory;
+
+    private PrezzoStrategyFactory(){};
+
+    public static PrezzoStrategyFactory getInstance(){
         if(factory == null)
-            factory = new PrezzoStrategyFactory();       
+            factory = new PrezzoStrategyFactory();
         return factory;
     }
-     
-     public PrezzoStrategyInterface getPrezzoStrategy(){
+
+    public PrezzoStrategyInterface getPrezzoStrategy(){
         return new PrezzoStrategy();
     }
 }

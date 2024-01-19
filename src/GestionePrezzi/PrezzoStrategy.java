@@ -1,7 +1,7 @@
 package GestionePrezzi;
 
-import GestioneBiglietteria.Partita;
-import GestioneBiglietteria.Tessera;
+import GestioneBiglietteriaNuova.Partita;
+import GestioneBiglietteriaNuova.Tessera;
 public class PrezzoStrategy implements PrezzoStrategyInterface{
 
      @Override
@@ -11,7 +11,7 @@ public class PrezzoStrategy implements PrezzoStrategyInterface{
           int eta=t.getEta();
           float base=t.getSettore().getPrezzoBiglietto();
           float prezzo=0;
-          
+
           switch(tipologia){
                case "Campionato":
                     if(eta<14)
@@ -48,5 +48,5 @@ public class PrezzoStrategy implements PrezzoStrategyInterface{
           }
           return prezzo;
      }
-     
+
 }

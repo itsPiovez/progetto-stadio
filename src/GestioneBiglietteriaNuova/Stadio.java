@@ -1,4 +1,4 @@
-package GestioneBiglietteria;
+package GestioneBiglietteriaNuova;
 
 import GestioneErrori.PostoErrore;
 import GestioneErrori.SettoreErrore;
@@ -51,8 +51,11 @@ public class Stadio {
     }
 
     public Posto sceltaPosto(int fila, int numero) throws PostoErrore {
-        Tribuna tr=(Tribuna)settoreScelto;
-        return tr.sceltaPosto(fila,numero);
+        if (settoreScelto != null) {
+            return settoreScelto.sceltaPosto(fila, numero);
+        } else {
+            throw new PostoErrore("Nessun settore selezionato.");
+        }
     }
 
     public void datiClienteAbb(String nominativo,String CF,int eta) throws datiClienteErrore{
@@ -70,10 +73,10 @@ public class Stadio {
     }
 
     public void loadSettori(){
-        Settore c1=new Curva("Curva Sud",5);
-        Settore c2=new Curva("Curva Nord",5);
-        Settore t1=new Tribuna("Tribuna Est",10);
-        Settore t2=new Tribuna("Tribuna Ovest",10);
+        Settore c1=new Curva("Curva Sud",5000);
+        Settore c2=new Curva("Curva Nord",5000);
+        Settore t1=new Tribuna("Tribuna Est",15000);
+        Settore t2=new Tribuna("Tribuna Ovest",15000);
 
         HashMap<String, Settore> settori=new HashMap();
         settori.put("Curva Sud",c1);
@@ -123,6 +126,4 @@ public class Stadio {
     public void setPartita(Partita partita) {
         this.partita = partita;
     }
-
-
 }

@@ -1,4 +1,4 @@
-package GestioneBiglietteria;
+package GestioneBiglietteriaNuova;
 
 import GestioneErrori.PostoErrore;
 import GestioneErrori.datiClienteErrore;
@@ -14,6 +14,8 @@ public abstract class Settore {
     private List<Biglietto> listaBiglietti;
     private List<Abbonamento>listaAbbonamenti;
     private Tessera abbonamentoCorrente;
+    private int numeroFile;
+    public abstract Posto sceltaPosto(int fila, int numero) throws PostoErrore;
 
     public Settore(String nome, int capienza) {
         this.nome = nome;

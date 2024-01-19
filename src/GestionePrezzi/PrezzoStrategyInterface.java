@@ -1,6 +1,6 @@
 package GestionePrezzi;
 
-import GestioneBiglietteria.Tessera;
+import GestioneBiglietteriaNuova.Tessera;
 public interface PrezzoStrategyInterface {
      float applicaTariffa(Tessera t);
 }

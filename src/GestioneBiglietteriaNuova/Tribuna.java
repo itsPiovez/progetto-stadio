@@ -1,4 +1,4 @@
-package GestioneBiglietteria;
+package GestioneBiglietteriaNuova;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,26 +93,15 @@ public class Tribuna extends Settore {
                 '}';
     }
 
-    public void loadPosti(){
-        Posto p1 = new Posto(1,1);
-        Posto p2 = new Posto(1,2);
-        Posto p3 = new Posto(1,3);
-        Posto p4 = new Posto(1,4);
-        Posto p5 = new Posto(1,5);
-        Posto p6 = new Posto(1,6);
-        Posto p7 = new Posto(1,7);
-        Posto p8 = new Posto(1,8);
-        Posto p9 = new Posto(1,9);
-        Posto p10 = new Posto(1,10);
-        this.listaPosti.add(p1);
-        this.listaPosti.add(p2);
-        this.listaPosti.add(p3);
-        this.listaPosti.add(p4);
-        this.listaPosti.add(p5);
-        this.listaPosti.add(p6);
-        this.listaPosti.add(p7);
-        this.listaPosti.add(p8);
-        this.listaPosti.add(p9);
-        this.listaPosti.add(p10);
+    public void loadPosti() {
+        int numeroFile = 30;
+        int postiPerFile = 500;
+
+        for (int i = 1; i <= numeroFile; i++) {
+            for (int j = 1; j <= postiPerFile; j++) {
+                Posto posto = new Posto(i, j);
+                this.listaPosti.add(posto);
+            }
+        }
     }
 }

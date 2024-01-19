@@ -1,4 +1,4 @@
-package GestioneBiglietteria;
+package GestioneBiglietteriaNuova;
 
 public class Tessera {
     private String codice;
