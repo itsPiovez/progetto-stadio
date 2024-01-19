@@ -43,7 +43,7 @@ public class AzioneTifoso extends Thread {
     }
 
     private void eseguiAzioneCasuale() {
-        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0});
 
         switch (azioneCasuale) {
             case 0:
@@ -85,7 +85,7 @@ public class AzioneTifoso extends Thread {
         try {
             Thread.sleep(random.nextInt(4000) + 6000); // Attendi tra 1 e 4 secondi
             // collego la classe ristorante
-            Ristorante.Cliente c = new Ristorante.Cliente("uomo",RistoranteCreazione.tavoli,RistoranteCreazione.coda,RistoranteCreazione.menu);
+            Ristorante.Cliente c = new Ristorante.Cliente(nomeTifoso,RistoranteCreazione.tavoli,RistoranteCreazione.coda,RistoranteCreazione.menu);
             Ristorante.RistoranteCreazione.coda.push(c);
             c.run();
         } catch (InterruptedException e) {
