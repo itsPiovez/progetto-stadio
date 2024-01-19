@@ -44,6 +44,7 @@ public class AzioneTifoso extends Thread {
 
     private void eseguiAzioneCasuale() {
         int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0});
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.1, 0.2, 0.1, 0.5, 0.1, 0.4, 0.3, 1, 0.2});
 
         switch (azioneCasuale) {
             case 0:
