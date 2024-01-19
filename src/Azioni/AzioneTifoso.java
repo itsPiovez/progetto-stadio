@@ -3,7 +3,8 @@ import Bagni.*;
 import Ristorante.*;
 import Merch.*;
 import Bar.*;
-import Ristorante.Menu;
+
+import CambioColore.Colore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class AzioneTifoso extends Thread {
     private Random random = new Random();
 
     private MerchShop merchShop;
+    private Bar bar;
 
     public AzioneTifoso(String nomeTifoso) {
         this.nomeTifoso = nomeTifoso;
@@ -49,22 +51,21 @@ public class AzioneTifoso extends Thread {
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1}); // prova merch
-
         switch (azioneCasuale) {
             case 0:
-                System.out.println(nomeTifoso + " sta cantando.");
+                System.out.println(Colore.getRandomColor(nomeTifoso + " sta cantando."));
                 break;
             case 1:
-                System.out.println(nomeTifoso + " sta sventolando la bandiera.");
+                System.out.println(Colore.getRandomColor(nomeTifoso + " sta sventolando la bandiera."));
                 break;
             case 2:
-                System.out.println(nomeTifoso + " sta applaudendo.");
+                System.out.println(Colore.getRandomColor(nomeTifoso + " sta applaudendo."));
                 break;
             case 3:
-                System.out.println(nomeTifoso + " sta lanciando coriandoli.");
+                System.out.println(Colore.getRandomColor(nomeTifoso + " sta lanciando coriandoli."));
                 break;
             case 4:
-                System.out.println(nomeTifoso + " sta fischiando.");
+                System.out.println(Colore.getRandomColor(nomeTifoso + " sta fischiando."));
                 break;
             case 5:
                 andareInBagno();
@@ -118,15 +119,14 @@ public class AzioneTifoso extends Thread {
 
     private void andareAlBar() {
         System.out.println(nomeTifoso + " sta andando al bar.");
-        // Simula il tempo trascorso per andare al bar
+
+        int NumeroCliente = (int) this.getId();
+        Caffetteria.numeriClienti.add(NumeroCliente);
+        Thread ClienteThread = new Thread(new ClientiBar(NumeroCliente, bar));
+        Caffetteria.clientiThreads.add(ClienteThread);
+        ClienteThread.start();
         try {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
-            // collego la classe merch
-            Bar bar = new Bar();
-            bar.Apertura();
-            ClientiBar b = new ClientiBar((int) this.getId(), bar);
-            //Caffetteria.Cliente.add(b);
-            b.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -135,23 +135,23 @@ public class AzioneTifoso extends Thread {
 
 
     private void andareAlMerch() {//manca da finire
-/*
+
         System.out.println(nomeTifoso + " sta andando al merch shop.");
 
-        Merch merch = new Merch();
+        int NumeroCliente = (int) this.getId();
+        Merch.numeriClientiTot.add(NumeroCliente);
+        Thread ClienteThread = new Thread(new ClientiMerch(NumeroCliente, merchShop));
+        Merch.clientiThreads.add(ClienteThread);
+        ClienteThread.start();
 
         try {
             // Simula il tempo trascorso per andare al merch
             Thread.sleep(random.nextInt(3000) + 5000);
-
-
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         System.out.println(nomeTifoso + " è tornato dal merch.");
-*/
     }
 
     private void attendiIntervalloCasuale() {
@@ -161,4 +161,5 @@ public class AzioneTifoso extends Thread {
             e.printStackTrace();
         }
     }
+
 }

@@ -8,34 +8,28 @@ import java.util.concurrent.Semaphore;
 
 public class Merch {
     public static MerchShop merchShop = new MerchShop();
+    public static List<Integer> numeriClientiTot = new ArrayList<>();
+    public static List<Thread> clientiThreads = new ArrayList<>();
 
     public Merch() {
         merchShop.Apertura();
         int NumeroClienti = 200;
-        List<Integer> numeriClienti = new ArrayList<>();
-        for (int i = 1; i <= NumeroClienti; i++) {
-            numeriClienti.add(i);
-        }
-        Collections.shuffle(numeriClienti);
-
-        List<Thread> clientiThreads = new ArrayList<>();
-
-        for (int i = 0; i < NumeroClienti; i++) {
-            int NumeroCliente = numeriClienti.get(i);
-            Thread ClienteThread = new Thread(new ClientiMerch(NumeroCliente, merchShop));
-            clientiThreads.add(ClienteThread);
-            ClienteThread.start();
-        }
-
-        for (Thread ClienteThread : clientiThreads) {
-            try {
-                ClienteThread.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
+            List<Integer> numeriClienti = numeriClientiTot;
+            int i = 0;
+            while (numeriClienti.size() < NumeroClienti) {
+                i++;
+                numeriClienti.add(i);
             }
-        }
+            Collections.shuffle(numeriClienti);
+            List<Thread> clientiThreads = Merch.clientiThreads;
+            for (Thread ClienteThread : clientiThreads) {
+                try {
+                    ClienteThread.join();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            }
 
-        merchShop.ChiudiMerchShop();
     }
 }

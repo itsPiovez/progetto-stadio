@@ -1,6 +1,6 @@
 package Giocatori;
 import Spogliatoi.SpogliatoioGiocatori;
-public class Giocatore extends Thread{
+public class Giocatore {
     private String nome;
     private int numeroMaglia; //numero di maglia dei giocatori
     private char squadra;  //C se sono in casa F se sono fuori casa
@@ -12,10 +12,20 @@ public class Giocatore extends Thread{
     public String getNome(){
         return nome;
     }
-
-    @Override
-    public void run() {
-
+    public int getNumeroMaglia(){
+        return numeroMaglia;
+    }
+    public char getSquadra(){
+        return squadra;
+    }
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+    public void setNumeroMaglia(int numeroMaglia){
+        this.numeroMaglia=numeroMaglia;
+    }
+    public void setSquadra(char squadra){
+        this.squadra=squadra;
     }
 }
 

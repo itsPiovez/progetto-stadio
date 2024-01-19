@@ -1,4 +1,6 @@
 package Bar;
+import Merch.MerchShop;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.concurrent.Semaphore;
 
 public class ClientiBar implements Runnable {
     private final int NumeroCliente;
-    private final Bar bar;
+    private Bar bar;
 
     public ClientiBar(int NumeroCliente, Bar bar) {
         this.NumeroCliente = NumeroCliente;
@@ -17,7 +19,10 @@ public class ClientiBar implements Runnable {
     @Override
     public void run() {
         try {
-            bar.AspettaClient();
+            if (this.bar == null) {
+                this.bar = new Bar();
+            }
+            bar.waitForClient();
             bar.ServizioCliente(NumeroCliente);
         } catch (Exception e) {
             e.printStackTrace();

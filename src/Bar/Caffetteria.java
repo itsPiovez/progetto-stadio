@@ -5,28 +5,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-
 public class Caffetteria {
-    public static void main(String[] args) {
-        Bar bar = new Bar();
+    public static Bar bar = new Bar();
+    public static List<Integer> numeriClienti = new ArrayList<>();
+    public static List<Thread> clientiThreads = new ArrayList<>();
+    public Caffetteria() {
         bar.Apertura();
-
         int NumeroClienti = 200;
-        List<Integer> numeriClienti = new ArrayList<>();
-        for (int i = 1; i <= NumeroClienti; i++) {
+        List<Integer> numeriClienti = Caffetteria.numeriClienti;
+        int i = 0;
+        while(numeriClienti.size() < NumeroClienti) {
+            i++;
             numeriClienti.add(i);
         }
+        List<Thread> clientiThreads = Caffetteria.clientiThreads;
         Collections.shuffle(numeriClienti);
-
-        List<Thread> clientiThreads = new ArrayList<>();
-
-        for (int i = 0; i < NumeroClienti; i++) {
-            int NumeroCliente = numeriClienti.get(i);
-            Thread ClienteThread = new Thread(new ClientiBar(NumeroCliente, bar));
-            clientiThreads.add(ClienteThread);
-            ClienteThread.start();
-        }
-
         for (Thread ClienteThread : clientiThreads) {
             try {
                 ClienteThread.join();

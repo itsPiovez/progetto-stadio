@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
+import static Merch.Merch.clientiThreads;
+
 public class MerchShop {
     private static final List<String> Oggetti = CreazioneOggetti();
     private static final List<Double> PrezzoOggetti = CreazionePrezziOggetti();
@@ -17,14 +19,26 @@ public class MerchShop {
             System.out.println("\nIl merch shop sta preparando ed è pronto ad aprire.");
             isOpen = true;
             System.out.println("Il merch shop è operativo.\n");
+            System.out.println("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
             // Stampa lista prezzi con la prima lettera maiuscola
-            System.out.println("Lista dei prezzi:");
+            System.out.println("Lista dei prezzi Merch:");
             for (int i = 0; i < Oggetti.size(); i++) {
                 String oggetto = Oggetti.get(i);
+                if(oggetto == "patatine"){
+                    System.out.println("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
+                    System.out.print("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
+                    System.out.println("");
+                    System.out.println("Lista dei prezzi del Bar:");
+                }
                 oggetto = Character.toUpperCase(oggetto.charAt(0)) + oggetto.substring(1);
                 System.out.println(oggetto + ": €" + FormatoPrezzo(PrezzoOggetti.get(i)));
             }
+            System.out.println("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
             System.out.println();
+            try{
+                Thread.sleep(3000);
+            }catch (InterruptedException e){
+            }
             notifyAll();
         }
     }
@@ -33,13 +47,15 @@ public class MerchShop {
         return isOpen;
     }
 
-    public void AspettaClient() throws InterruptedException {
-        semaphore.acquire(); // Acquisisci un permesso
-        while (!isOpen) {
-            wait();
+    public synchronized void waitForClient() {
+        while (clientiThreads.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // restore interrupted status
+            }
         }
     }
-
     public void ServizioCliente(int NumeroCliente) {
         System.out.println("Cliente " + NumeroCliente + " è arrivato al merch shop.");
 
@@ -84,6 +100,10 @@ public class MerchShop {
         oggetti.add("pantaloncino");
         oggetti.add("trombetta");
         oggetti.add("felpa");
+        oggetti.add("patatine");
+        oggetti.add("bibita");
+        oggetti.add("panino");
+        oggetti.add("birra");
         return oggetti;
     }
 
@@ -96,6 +116,10 @@ public class MerchShop {
         prezzi.add(18.0);
         prezzi.add(12.0);
         prezzi.add(30.0);
+        prezzi.add(5.0);
+        prezzi.add(3.0);
+        prezzi.add(7.0);
+        prezzi.add(4.0);
         return prezzi;
     }
 

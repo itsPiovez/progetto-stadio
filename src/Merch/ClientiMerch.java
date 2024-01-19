@@ -2,7 +2,7 @@ package Merch;
 
 public class ClientiMerch extends Thread {
     private final int NumeroCliente;
-    private final MerchShop merchShop;
+    private MerchShop merchShop;
 
     public ClientiMerch(int NumeroCliente, MerchShop merchShop) {
         this.NumeroCliente = NumeroCliente;
@@ -12,7 +12,10 @@ public class ClientiMerch extends Thread {
     @Override
     public void run() {
         try {
-            merchShop.AspettaClient();
+            if (this.merchShop == null) {
+                this.merchShop = new MerchShop();
+            }
+            merchShop.waitForClient();
             merchShop.ServizioCliente(NumeroCliente);
         } catch (Exception e) {
             e.printStackTrace();

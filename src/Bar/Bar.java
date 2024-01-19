@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
+import static Merch.Merch.clientiThreads;
+
 public class Bar {
     private static final List<String> Prodotti = CreazioneProdotti();
     private static final List<Double> PrezzoProdotti = CreazionePrezziProdotti();
@@ -32,10 +34,13 @@ public class Bar {
         return isOpen;
     }
 
-    public void AspettaClient() throws InterruptedException {
-        semaphore.acquire(); // Acquisisci un permesso
-        while (!isOpen) {
-            wait();
+    public synchronized void waitForClient() {
+        while (clientiThreads.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // restore interrupted status
+            }
         }
     }
 
@@ -54,7 +59,7 @@ public class Bar {
                 System.out.println("Cliente " + NumeroCliente + " vuole acquistare " + Quantita + " " + selectedProduct);
 
                 // Modifica qui: stampa il costo per l'oggetto
-                System.out.println("Cliente " + NumeroCliente + " paga" + FormatoPrezzo(PrezzoTotale) +" € "+
+                System.out.println("Cliente " + NumeroCliente + " paga " + FormatoPrezzo(PrezzoTotale) +" € "+
                         " (costo totale " + selectedProduct + ")");
 
                 TotaleCosti += PrezzoTotale;
