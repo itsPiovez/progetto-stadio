@@ -43,9 +43,9 @@ public class AzioneTifoso extends Thread {
     }
 
     private void eseguiAzioneCasuale() {
-        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
-        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
 
         switch (azioneCasuale) {
             case 0:
@@ -87,7 +87,7 @@ public class AzioneTifoso extends Thread {
         try {
             Thread.sleep(random.nextInt(4000) + 6000); // Attendi tra 1 e 4 secondi
             // collego la classe ristorante
-            Ristorante.Cliente c = new Ristorante.Cliente("uomo",RistoranteCreazione.tavoli,RistoranteCreazione.coda,RistoranteCreazione.menu);
+            Ristorante.Cliente c = new Ristorante.Cliente(nomeTifoso,RistoranteCreazione.tavoli,RistoranteCreazione.coda,RistoranteCreazione.menu);
             Ristorante.RistoranteCreazione.coda.push(c);
             c.run();
         } catch (InterruptedException e) {
@@ -112,21 +112,24 @@ public class AzioneTifoso extends Thread {
         System.out.println(nomeTifoso + " è tornato dal bagno.");
     }
 
+
     private void andareAlBar() {
         System.out.println(nomeTifoso + " sta andando al bar.");
-
+        // Simula il tempo trascorso per andare al bar
         try {
-            Thread.sleep((new Random().nextInt(3000) + 1000));
-            Bar.BarCreazione d = new BarCreazione();
-            Bar.Cliente c = new Bar.Cliente("Tifoso", Bar.BarCreazione.coda,BarCreazione.menu);
-            Bar.BarCreazione.coda.push(c);
-            c.run();
+            Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
+            // collego la classe merch
+            Bar bar = new Bar();
+            bar.Apertura();
+            ClientiBar b = new ClientiBar((int) this.getId(), bar);
+            //Caffetteria.Cliente.add(b);
+            b.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         System.out.println(nomeTifoso + " è tornato dal bar.");
     }
+
 
     private void andareAlMerch() {//manca da finire
         System.out.println(nomeTifoso + " sta andando al merch.");

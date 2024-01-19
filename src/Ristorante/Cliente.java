@@ -15,6 +15,7 @@ public class Cliente extends Tifoso implements Runnable {
 
     public Cliente(String nome, List<Ristorante.Tavolo> tavoli, Ristorante.Coda<Ristorante.Cliente> coda,Menu m) {
         super(nome);
+        this.nome = nome;
         this.tavoli = tavoli;
         this.coda = coda;
         this.menu=m;
