@@ -46,10 +46,13 @@ public class Cliente extends Tifoso implements Runnable {
                 }
             }
         }
-
         // Ora il cliente è stato accomodato e può ordinare
         System.out.println("        Cameriere accomoda il " + nome + " al tavolo " + tavolo.getNumero());
+
+        cadutaPosata(tavolo); // Passa il tavolo come parametro //FEATURE AGGIUNTA
         int numeroPiatti = (int) (Math.random() * 4) + 1;  // Numero di piatti da ordinare
+        // ... (resto del codice)
+
         String bevandaScelta = ScegliBevanda();
         double prezzoBevanda = menu.getPrezzo(bevandaScelta);
         totale=totale+prezzoBevanda;
@@ -113,6 +116,19 @@ public class Cliente extends Tifoso implements Runnable {
         // Simulazione della scelta di un dolce a caso dal menu
         String[] piatti = {"Torta", "Gelato","Tiramisù","Crostata","Crepes","Caffè"};
         return piatti[(int) (Math.random() * piatti.length)];
+    }
+
+    //FEATURE AGGIUNTA
+    private void cadutaPosata(Tavolo tavolo) {
+        if (Math.random() < 0.1) { // 10% di probabilità che cada la posata
+            System.out.println("        Oops! La posata è caduta dal tavolo " + tavolo.getNumero());
+            try {
+                Thread.sleep(1000); // Attendi un secondo simulando il tempo per raccogliere la posata
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("        Cameriere raccoglie la posata per il " + nome);
+        }
     }
 }
 
