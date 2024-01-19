@@ -29,6 +29,7 @@ public class Cameriere implements Runnable {
             if (tavolo != null) {
                 System.out.println("Cameriere " + nome + " accomoda il " + cliente.getNome() + " al tavolo " + tavolo.getNumero());
                 tavolo.getCoda().push(cliente);
+                raccogliPosata(cliente); // FEATURE AGGIUNTA per raccogliere la posata dopo aver accomodato il cliente
             } else {
                 // Se non trova un tavolo, il cliente deve uscire dal ristorante
                 System.out.println("Cameriere " + nome + " non trova un tavolo per il " + cliente.getNome() + ". Il cliente lascia il ristorante.");
@@ -45,4 +46,10 @@ public class Cameriere implements Runnable {
         }
         return null; // Dovrebbe essere gestito meglio, ad esempio ritentando dopo un certo intervallo
     }
+
+    //FEATURE AGGIUNTA
+    private void raccogliPosata(Ristorante.Cliente cliente) {
+        System.out.println("Cameriere " + nome + " raccoglie la posata per il " + cliente.getNome());
+    }
+
 }
