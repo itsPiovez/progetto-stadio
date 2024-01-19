@@ -3,6 +3,7 @@ import Bagni.*;
 import Ristorante.*;
 import Merch.*;
 import Bar.*;
+import Ristorante.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +38,16 @@ public class AzioneTifoso extends Thread {
                 return i; // Restituisce il numero corrispondente alla probabilità raggiunta
             }
         }
-
         // In caso di problemi (es. somma delle probabilità non 1), restituisce -1 o gestisci l'errore in altro modo
         return -1;
     }
 
     private void eseguiAzioneCasuale() {
-        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0});
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0});
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.1, 0.2, 0.1, 0.5, 0.1, 0.4, 0.3, 1, 0.2});
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
 
         switch (azioneCasuale) {
             case 0:
@@ -111,26 +114,33 @@ public class AzioneTifoso extends Thread {
         System.out.println(nomeTifoso + " è tornato dal bagno.");
     }
 
-    private void andareAlBar() {   //manca da finire
+    private void andareAlBar() {
         System.out.println(nomeTifoso + " sta andando al bar.");
-        // Simula il tempo trascorso al bar
+
         try {
-            Thread.sleep(random.nextInt(3000) + 1000); // Attendi tra 1 e 4 secondi
-            Bar bar = Bar.getInstance();
-            ClienteBar cliente = new ClienteBar(nomeTifoso, bar);
-            new Thread(cliente).start();
+            Thread.sleep((new Random().nextInt(3000) + 1000));
+            Bar.BarCreazione d = new BarCreazione();
+            Bar.Cliente c = new Bar.Cliente("Tifoso", Bar.BarCreazione.coda,BarCreazione.menu);
+            Bar.BarCreazione.coda.push(c);
+            c.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         System.out.println(nomeTifoso + " è tornato dal bar.");
     }
+
     private void andareAlMerch() {//manca da finire
         System.out.println(nomeTifoso + " sta andando al merch.");
         // Simula il tempo trascorso per andare al merch
         try {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
             // collego la classe merch
-            //MerchShop merchShop = MerchShop.getInstance();
+            MerchShop merchShop = new MerchShop();
+            merchShop.Apertura();
+            ClientiMerch c = new ClientiMerch((int) this.getId(), merchShop);
+            Merch.Cliente.add(c);
+            c.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

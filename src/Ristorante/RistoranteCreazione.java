@@ -44,12 +44,5 @@ public class RistoranteCreazione {
         for (Ristorante.Cuoco cuoco : cuochi) {
             new Thread(cuoco).start();
         }
-        // Creazione dei clienti e inserimento nella coda
-        /*
-        for (int i = 1; i <= numClients; i++) {
-            Ristorante.Cliente cliente = new Ristorante.Cliente("Cliente " + i, tavoli, coda, menu);
-            new Thread(cliente).start(); // Avvia il thread del cliente
-            utenteUscitoHandler.utenteUscito();
-        }*/
     }
 }

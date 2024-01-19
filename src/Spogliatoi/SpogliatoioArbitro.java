@@ -38,7 +38,6 @@ public class  SpogliatoioArbitro extends Thread{
         arbitro.start();
         assistenti.forEach(Assistenti::start);
         guardialinee.forEach(Guardialinee::start);
-
     }
 }
 
