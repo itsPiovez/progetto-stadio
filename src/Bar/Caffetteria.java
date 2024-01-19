@@ -1,4 +1,4 @@
-package Merch;
+package Bar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-public class Merch {
-    public static MerchShop merchShop = new MerchShop();
+public class Caffetteria {
+    public static void main(String[] args) {
+        Bar bar = new Bar();
+        bar.Apertura();
 
-    public Merch() {
-        merchShop.Apertura();
         int NumeroClienti = 200;
         List<Integer> numeriClienti = new ArrayList<>();
         for (int i = 1; i <= NumeroClienti; i++) {
@@ -22,7 +22,7 @@ public class Merch {
 
         for (int i = 0; i < NumeroClienti; i++) {
             int NumeroCliente = numeriClienti.get(i);
-            Thread ClienteThread = new Thread(new ClientiMerch(NumeroCliente, merchShop));
+            Thread ClienteThread = new Thread(new ClientiBar(NumeroCliente, bar));
             clientiThreads.add(ClienteThread);
             ClienteThread.start();
         }
@@ -36,6 +36,6 @@ public class Merch {
             }
         }
 
-        merchShop.ChiudiMerchShop();
+        bar.ChiudiBar();
     }
 }

@@ -13,6 +13,8 @@ public class AzioneTifoso extends Thread {
     private String nomeTifoso;
     private Random random = new Random();
 
+    private MerchShop merchShop;
+
     public AzioneTifoso(String nomeTifoso) {
         this.nomeTifoso = nomeTifoso;
     }
@@ -46,6 +48,7 @@ public class AzioneTifoso extends Thread {
         int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1}); // prova merch
 
         switch (azioneCasuale) {
             case 0:
@@ -132,20 +135,23 @@ public class AzioneTifoso extends Thread {
 
 
     private void andareAlMerch() {//manca da finire
-        System.out.println(nomeTifoso + " sta andando al merch.");
-        // Simula il tempo trascorso per andare al merch
+/*
+        System.out.println(nomeTifoso + " sta andando al merch shop.");
+
+        Merch merch = new Merch();
+
         try {
-            Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
-            // collego la classe merch
-            MerchShop merchShop = new MerchShop();
-            merchShop.Apertura();
-            ClientiMerch c = new ClientiMerch((int) this.getId(), merchShop);
-            Merch.Cliente.add(c);
-            c.run();
+            // Simula il tempo trascorso per andare al merch
+            Thread.sleep(random.nextInt(3000) + 5000);
+
+
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         System.out.println(nomeTifoso + " è tornato dal merch.");
+*/
     }
 
     private void attendiIntervalloCasuale() {

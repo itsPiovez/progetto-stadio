@@ -8,10 +8,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        MerchShop merchShop = new MerchShop();
-        merchShop.Apertura();
+        Merch merch = new Merch();
         Ristorante.RistoranteCreazione ristoranteCreazione = new Ristorante.RistoranteCreazione();
         Bagni.BagniCreazione bagniCreazione = new Bagni.BagniCreazione();
+
         List<Tifoso> tot = CreaTifo.CreaTifoso(100);
         if (tot != null && !tot.isEmpty()) {
             // voglio che i tifosi che entrano in questo ciclo vengono sbalzati nella classe azionetifoso

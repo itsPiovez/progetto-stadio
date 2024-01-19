@@ -1,19 +1,30 @@
 package Merch;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class MerchShop {
     private static final List<String> Oggetti = CreazioneOggetti();
     private static final List<Double> PrezzoOggetti = CreazionePrezziOggetti();
     private boolean isOpen = false;
+    private Semaphore semaphore = new Semaphore(10); // Numero massimo di clienti che possono essere serviti contemporaneamente
 
     public synchronized void Apertura() {
         if (!isOpen) {
-            System.out.println("Il merch shop sta preparando ed è pronto ad aprire.");
+            System.out.println("\nIl merch shop sta preparando ed è pronto ad aprire.");
             isOpen = true;
-            System.out.println("Il merch shop è operativo.");
+            System.out.println("Il merch shop è operativo.\n");
+            // Stampa lista prezzi con la prima lettera maiuscola
+            System.out.println("Lista dei prezzi:");
+            for (int i = 0; i < Oggetti.size(); i++) {
+                String oggetto = Oggetti.get(i);
+                oggetto = Character.toUpperCase(oggetto.charAt(0)) + oggetto.substring(1);
+                System.out.println(oggetto + ": €" + FormatoPrezzo(PrezzoOggetti.get(i)));
+            }
+            System.out.println();
             notifyAll();
         }
     }
@@ -22,40 +33,41 @@ public class MerchShop {
         return isOpen;
     }
 
-    public synchronized void AspettaClient() {
+    public void AspettaClient() throws InterruptedException {
+        semaphore.acquire(); // Acquisisci un permesso
         while (!isOpen) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
-            }
+            wait();
         }
     }
 
-    public synchronized void ServizioCliente(int NumeroCliente) {
+    public void ServizioCliente(int NumeroCliente) {
         System.out.println("Cliente " + NumeroCliente + " è arrivato al merch shop.");
 
         double TotaleCosti = 0.0;
         Random random = new Random();
 
         for (String selectedItem : Oggetti) {
-            // Scelgo se il cliente vuole acquistare l'oggetto
-            if (random.nextBoolean()) {
-                int Quantita = random.nextInt(3) + 1; // Quantità casuale tra 1 e 3
-                double PrezzoOggetto = PrezzoOggetti.get(Oggetti.indexOf(selectedItem));
-                double PrezzoTotale = PrezzoOggetto * Quantita;
+            int Quantita = random.nextInt(3) + 1; // Quantità casuale tra 1 e 3
+            double PrezzoOggetto = PrezzoOggetti.get(Oggetti.indexOf(selectedItem));
+            double PrezzoTotale = PrezzoOggetto * Quantita;
 
+            if (random.nextBoolean()) {
                 System.out.println("Cliente " + NumeroCliente + " vuole comprare " + Quantita + " " + (Quantita > 1 ? Plurale(selectedItem) : selectedItem));
-                System.out.println("Prezzo singolo per " + selectedItem + ": €" + FormatoPrezzo(PrezzoOggetto));
-                System.out.println("Prezzo totale per " + selectedItem + ": €" + FormatoPrezzo(PrezzoTotale));
+
+
+                // Modifica qui: stampa il costo per l'oggetto
+                System.out.println("Cliente " + NumeroCliente + " spende €" + FormatoPrezzo(PrezzoTotale) +
+                        " (costo totale " + (Quantita > 1 ? Plurale(selectedItem) : selectedItem) + ")");
 
                 TotaleCosti += PrezzoTotale;
             }
         }
 
-        System.out.println("Cliente " + NumeroCliente + " paga un totale di: €" + FormatoPrezzo(TotaleCosti));
+        // Modifica qui: stampa il totale pagato dal cliente
+        System.out.println("Cliente " + NumeroCliente + " spende complessivamente €" + FormatoPrezzo(TotaleCosti));
         System.out.println("Il cliente " + NumeroCliente + " è uscito dallo shop.");
+
+        semaphore.release(); // Rilascia il permesso
     }
 
     public synchronized void ChiudiMerchShop() {
@@ -87,24 +99,17 @@ public class MerchShop {
         return prezzi;
     }
 
-    private static String Plurale(String oggetti)
-    {
-        if (oggetti.endsWith("o"))
-        {
+    private static String Plurale(String oggetti) {
+        if (oggetti.endsWith("o")) {
             return oggetti.substring(0, oggetti.length() - 1) + "i";
-        }
-        else if (oggetti.endsWith("a"))
-        {
+        } else if (oggetti.endsWith("a")) {
             return oggetti.substring(0, oggetti.length() - 1) + "e";
-        }
-        else
-        {
+        } else {
             return oggetti + "i";
         }
     }
 
-    private static String FormatoPrezzo(double price)
-    {
+    private static String FormatoPrezzo(double price) {
         return String.format("%.2f", price).replace(".", ",");
     }
 }
