@@ -50,27 +50,41 @@ public class AzioneTifoso extends Thread {
     }
 
     private void eseguiAzioneCasuale() {
-        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1}); // prova merch
-        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 1, 0, 0, 0}); // prova bagno
-
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 1, 0, 0, 0}); // prova bagno
         switch (azioneCasuale) {
             case 0:
-                System.out.println(Colore.getRandomColor(nomeTifoso + " sta cantando."));
+                if(Main.random)
+                    System.out.println(Colore.getRandomColor(nomeTifoso + " sta cantando."));
+                else
+                    System.out.println("\u001B[33m" + nomeTifoso + " sta cantando."+"\u001B[0m");
                 break;
             case 1:
-                System.out.println(Colore.getRandomColor(nomeTifoso + " sta sventolando la bandiera."));
+                if(Main.random)
+                    System.out.println(Colore.getRandomColor(nomeTifoso + " sta sventolando la bandiera."));
+                else
+                    System.out.println("\u001B[32m"+nomeTifoso + " sta sventolando la bandiera."+"\u001B[0m");
                 break;
             case 2:
-                System.out.println(Colore.getRandomColor(nomeTifoso + " sta applaudendo."));
+                if(Main.random)
+                    System.out.println(Colore.getRandomColor(nomeTifoso + " sta applaudendo."));
+                else
+                    System.out.println("\u001B[35m"+nomeTifoso + " sta applaudendo."+"\u001B[0m");
                 break;
             case 3:
-                System.out.println(Colore.getRandomColor(nomeTifoso + " sta lanciando coriandoli."));
+                if(Main.random)
+                    System.out.println(Colore.getRandomColor(nomeTifoso + " sta lanciando coriandoli."));
+                else
+                    System.out.println("\u001B[34m"+nomeTifoso + " sta lanciando coriandoli."+"\u001B[0m");
                 break;
             case 4:
-                System.out.println(Colore.getRandomColor(nomeTifoso + " sta fischiando."));
+                if(Main.random)
+                    System.out.println(Colore.getRandomColor(nomeTifoso + " sta fischiando."));
+                else
+                    System.out.println("\u001B[36m"+nomeTifoso + " sta fischiando."+"\u001B[0m");
                 break;
             case 5:
                 andareInBagno();

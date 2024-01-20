@@ -9,10 +9,14 @@ import Bar.*;
 import TransferMarket.*;
 import java.util.List;
 import CambioColore.Colore;
+import Annunci.*;
+import java.util.Scanner;
+
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static boolean random;
+    public static void main(String[] args) {/*
         Transfermarket transfermarket = new Transfermarket();
         transfermarket.start();
         try {
@@ -20,12 +24,27 @@ public class Main {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        AggiungiSleep();
+        AggiungiSleep();*/
         Caricamento();
-
+        System.out.println("");
+        System.out.println("Vuoi visualizzare le azioni dei tifosi con colori random? (S/N)");
+        Scanner scanner = new Scanner(System.in);
+        char answer = scanner.next().charAt(0);
+        if (answer == 'S' || answer == 's') {
+            System.out.println("Ok, ora puoi vedere le azioni dei tifosi con colori random");
+            random = true;
+        } else if (answer == 'N' || answer == 'n') {
+            System.out.println("Ok, ora puoi vedere le azioni dei tifosi con colori standard");
+            random = false;
+        } else {
+            System.out.println("Non hai inserito un carattere valido, ora puoi vedere le azioni dei tifosi con colori standard");
+            random = false;
+        }
+        AggiungiSleep();
         Merch merch = new Merch();
         Bar bar = new Bar();
         Ristorante.RistoranteCreazione ristoranteCreazione = new Ristorante.RistoranteCreazione();
+        CreaAnnunci annunci = new CreaAnnunci();
         Bagni.BagniCreazione bagniCreazione = new Bagni.BagniCreazione();
         List<Tifoso> tot = CreaTifo.CreaTifoso(100);
         if (tot != null && !tot.isEmpty()) {
@@ -82,8 +101,9 @@ public class Main {
         System.out.print(("Benvenuto all'Allianz Stadium") + "\n");
         System.out.println("Stai per assistere alla gestione dei tifosi durante una partita di calcio");
         System.out.println("Iniziamo con il caricamento dei tifosi...");
+
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
