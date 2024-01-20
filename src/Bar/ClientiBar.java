@@ -8,10 +8,10 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class ClientiBar implements Runnable {
-    private final int NumeroCliente;
+    private final String NumeroCliente;
     private Bar bar;
 
-    public ClientiBar(int NumeroCliente, Bar bar) {
+    public ClientiBar(String NumeroCliente, Bar bar) {
         this.NumeroCliente = NumeroCliente;
         this.bar = bar;
     }

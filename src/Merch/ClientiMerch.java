@@ -1,10 +1,10 @@
 package Merch;
 
 public class ClientiMerch extends Thread {
-    private final int NumeroCliente;
+    private final String NumeroCliente;
     private MerchShop merchShop;
 
-    public ClientiMerch(int NumeroCliente, MerchShop merchShop) {
+    public ClientiMerch(String NumeroCliente, MerchShop merchShop) {
         this.NumeroCliente = NumeroCliente;
         this.merchShop = merchShop;
     }

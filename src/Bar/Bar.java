@@ -44,8 +44,8 @@ public class Bar {
         }
     }
 
-    public void ServizioCliente(int NumeroCliente) {
-        System.out.println("Cliente " + NumeroCliente + " è arrivato al bar.");
+    public void ServizioCliente(String NumeroCliente) {
+        System.out.println(NumeroCliente + " è arrivato al bar.");
 
         double TotaleCosti = 0.0;
         Random random = new Random();
@@ -56,10 +56,10 @@ public class Bar {
             double PrezzoTotale = PrezzoProdotto * Quantita;
 
             if (random.nextBoolean()) {
-                System.out.println("Cliente " + NumeroCliente + " vuole acquistare " + Quantita + " " + selectedProduct);
+                System.out.println(NumeroCliente + " vuole acquistare " + Quantita + " " + selectedProduct);
 
                 // Modifica qui: stampa il costo per l'oggetto
-                System.out.println("Cliente " + NumeroCliente + " paga " + FormatoPrezzo(PrezzoTotale) +" € "+
+                System.out.println(NumeroCliente + " paga " + FormatoPrezzo(PrezzoTotale) +" € "+
                         " (costo totale " + selectedProduct + ")");
 
                 TotaleCosti += PrezzoTotale;
@@ -67,8 +67,8 @@ public class Bar {
         }
 
         // Modifica qui: stampa il totale pagato dal cliente
-        System.out.println("Cliente " + NumeroCliente + " spende in totale " + FormatoPrezzo(TotaleCosti)+" €");
-        System.out.println("Il cliente " + NumeroCliente + " è uscito dal bar.");
+        System.out.println(NumeroCliente + " spende in totale " + FormatoPrezzo(TotaleCosti)+" €");
+        System.out.println(NumeroCliente + " è uscito dal bar.");
 
         semaphore.release(); // Rilascia il permesso
     }

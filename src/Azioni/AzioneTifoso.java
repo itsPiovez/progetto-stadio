@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static Bagni.BagniCreazione.donne;
+import static Bagni.BagniCreazione.uomini;
+
 public class AzioneTifoso extends Thread {
     private String nomeTifoso;
     private Random random = new Random();
@@ -47,10 +50,12 @@ public class AzioneTifoso extends Thread {
     }
 
     private void eseguiAzioneCasuale() {
-        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
+        //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05});
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}); // prova ristorante
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}); // prova bar
         //int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1}); // prova merch
+        int azioneCasuale = generaNumeroConProbabilitaPersonalizzate(new double[]{0, 0, 0, 0, 0, 1, 0, 0, 0}); // prova bagno
+
         switch (azioneCasuale) {
             case 0:
                 System.out.println(Colore.getRandomColor(nomeTifoso + " sta cantando."));
@@ -103,13 +108,31 @@ public class AzioneTifoso extends Thread {
     private void andareInBagno() {
         System.out.println(nomeTifoso + " sta andando in bagno.");
         Random random = new Random();
+
         // Simula il tempo trascorso in bagno
         try {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
             // collego la classe bagno
             String sesso = random.nextBoolean() ? "uomo" : "donna";
-            Persona p = new Persona(sesso, (int) this.getId());
-            Bagni.Bagno.c.push(p);
+
+            Toilet t;
+            Persona p;
+
+            // Aggiungi che se il sesso del tifoso è maschio allora lo aggiungo alla lista di toilet per maschi
+            // altrimenti lo aggiungo alla lista di toilet per donne
+            if (sesso.equals("uomo")) {
+                t = BagniCreazione.uomini.get(random.nextInt(uomini.size()));
+                p = new Persona(sesso, "Tifoso " + (int) this.getId(), t);
+            } else {
+                t = donne.get(random.nextInt(donne.size()));
+                p = new Persona(sesso, "Tifoso " + (int) this.getId(), t);
+            }
+
+            // Aggiungi la persona alla coda
+            Bagno.c.push(p);
+
+            // Chiamare il metodo usa_bagno() direttamente sulla persona
+            p.usa_bagno();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -117,12 +140,13 @@ public class AzioneTifoso extends Thread {
     }
 
 
+
     private void andareAlBar() {
         System.out.println(nomeTifoso + " sta andando al bar.");
 
         int NumeroCliente = (int) this.getId();
         Caffetteria.numeriClienti.add(NumeroCliente);
-        Thread ClienteThread = new Thread(new ClientiBar(NumeroCliente, bar));
+        Thread ClienteThread = new Thread(new ClientiBar("Tifoso "+NumeroCliente, bar));
         Caffetteria.clientiThreads.add(ClienteThread);
         ClienteThread.start();
         try {
@@ -140,7 +164,7 @@ public class AzioneTifoso extends Thread {
 
         int NumeroCliente = (int) this.getId();
         Merch.numeriClientiTot.add(NumeroCliente);
-        Thread ClienteThread = new Thread(new ClientiMerch(NumeroCliente, merchShop));
+        Thread ClienteThread = new Thread(new ClientiMerch("Tifoso "+NumeroCliente, merchShop));
         Merch.clientiThreads.add(ClienteThread);
         ClienteThread.start();
 

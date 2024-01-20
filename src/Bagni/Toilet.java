@@ -42,35 +42,37 @@ public synchronized void setVisitatori(int visitatori) {
 public synchronized int getVisitatori() {
     return visitatori;
 }
+    public synchronized void usa_bagno(String TID, Random r, Persona persona) {
+        lock.lock();
+        try {
+            while (!pulito) {
+                try {
+                    condition.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
-public void usa_bagno(String TID, Random r) {
-    lock.lock();
-    try {
-        while (!pulito) {
+            visitatori++;
+            System.out.println(TID + " è entrato nel bagno per " + tipo + " [visitatore n. " + visitatori + "]");
             try {
-                condition.await();
+                Thread.sleep(r.nextInt(5) * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+            System.out.println(TID + " sta uscendo dal bagno per " + tipo);
 
-        visitatori++;
-        System.out.println("La Persona " + TID + " è entrata nel bagno per " + tipo + " [visitatore n. " + visitatori + "]");
-        try {
-            Thread.sleep(r.nextInt(5) * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            if (visitatori > 40) {
+                pulito = false;
+                pulisci(this);
+                // Ora notifica la persona che il bagno è stato pulito
+                persona.setToilet(this);
+            }
+        } finally {
+            lock.unlock();
         }
-        System.out.println("La Persona " + TID + " sta uscendo dal bagno per " + tipo);
-
-        if (visitatori > 40) {
-            pulito = false;
-            pulisci(this);
-        }
-    } finally {
-        lock.unlock();
     }
-}
+
 }
 
 

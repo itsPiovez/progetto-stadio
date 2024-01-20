@@ -56,8 +56,8 @@ public class MerchShop {
             }
         }
     }
-    public void ServizioCliente(int NumeroCliente) {
-        System.out.println("Cliente " + NumeroCliente + " è arrivato al merch shop.");
+    public void ServizioCliente(String NumeroCliente) {
+        System.out.println(NumeroCliente+ " è arrivato al merch shop.");
 
         double TotaleCosti = 0.0;
         Random random = new Random();
@@ -68,11 +68,11 @@ public class MerchShop {
             double PrezzoTotale = PrezzoOggetto * Quantita;
 
             if (random.nextBoolean()) {
-                System.out.println("Cliente " + NumeroCliente + " vuole comprare " + Quantita + " " + (Quantita > 1 ? Plurale(selectedItem) : selectedItem));
+                System.out.println(NumeroCliente + " vuole comprare " + Quantita + " " + (Quantita > 1 ? Plurale(selectedItem) : selectedItem));
 
 
                 // Modifica qui: stampa il costo per l'oggetto
-                System.out.println("Cliente " + NumeroCliente + " spende €" + FormatoPrezzo(PrezzoTotale) +
+                System.out.println(NumeroCliente + " spende €" + FormatoPrezzo(PrezzoTotale) +
                         " (costo totale " + (Quantita > 1 ? Plurale(selectedItem) : selectedItem) + ")");
 
                 TotaleCosti += PrezzoTotale;
@@ -80,8 +80,8 @@ public class MerchShop {
         }
 
         // Modifica qui: stampa il totale pagato dal cliente
-        System.out.println("Cliente " + NumeroCliente + " spende complessivamente €" + FormatoPrezzo(TotaleCosti));
-        System.out.println("Il cliente " + NumeroCliente + " è uscito dallo shop.");
+        System.out.println(NumeroCliente + " spende complessivamente €" + FormatoPrezzo(TotaleCosti));
+        System.out.println(NumeroCliente + " è uscito dallo shop.");
 
         semaphore.release(); // Rilascia il permesso
     }

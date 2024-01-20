@@ -39,7 +39,7 @@ public class Main {
 
     public static void AggiungiSleep(){
         try {
-            Thread.sleep(7000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -87,6 +87,7 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("");
     }
 }
 
