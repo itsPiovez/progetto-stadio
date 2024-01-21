@@ -80,8 +80,27 @@ public class Menu {
     public Map<String, Double> getPiatti() {
         return piatti;
     }
+    public void stampaMenu() {
+        System.out.println("\nIl ristorante sta preparando ed è pronto ad aprire.");
+        System.out.println("Il ristorante è operativo.\n");
+        System.out.println("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
+        System.out.println("Menu:");
+        for (Map.Entry<String, Double> entry : piatti.entrySet()) {
+            System.out.println("Piatto: " + entry.getKey() + " - Prezzo: €" + entry.getValue()+"0");
+        }
+        System.out.println("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
+        System.out.println();
+        Attendi();
+    }
 
-
+public void Attendi(){
+        try{
+            Thread.sleep(3000);
+        }
+        catch(InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+}
     public Double getPrezzo(String piatto) {
         return piatti.getOrDefault(piatto, 0.0);
     }

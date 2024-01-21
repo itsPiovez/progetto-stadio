@@ -13,7 +13,7 @@ public class BagniCreazione extends Thread{
     public BagniCreazione()  {
         int id = 0;
         //creo 3 bagni per uomini e 3 per donne
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 20; i++) {
             donne.add(new Toilet("donna"));
             uomini.add(new Toilet("uomo"));
         }

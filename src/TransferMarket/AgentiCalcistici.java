@@ -25,7 +25,7 @@ public class AgentiCalcistici {
 
         try {
             // Simula il processo di negoziazione
-            Thread.sleep(new Random().nextInt(3000) + 2000);
+            Thread.sleep(new Random().nextInt(2000) + 1000);
 
             // Accetta l'offerta con una probabilità del 50%
             if (new Random().nextDouble() <= 0.5) {
@@ -50,21 +50,24 @@ public class AgentiCalcistici {
     }
 
     public synchronized void completaTrattativa() {
-        while (trattativa == null || !trattativa.isSuccesso()) {
-            try {
-                wait(); // Attendi che la trattativa venga inizializzata e sia accettata dal thread venditore
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        try {
+            // Attendi che la trattativa sia accettata dal thread venditore
+            while (trattativa == null || !trattativa.isSuccesso()) {
+                wait();
             }
+
+            // Simula il completamento della trattativa
+            System.out.println("Trattativa completata con successo per " + trattativa.getGiocatore().getNome() +
+                    ". " + trattativa.getClubAcquirente().getNome() + " paga " + formatCurrency(trattativa.getPrezzoTrattativa()) + " al " +
+                    trattativa.getClubVenditore().getNome() + "\n");
+
+            System.out.println("Attendere prego...");
+
+            trattativa = null;
+            trattativaAccettata = false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
-        // Simula il completamento della trattativa
-        System.out.println("Trattativa completata con successo per " + trattativa.getGiocatore().getNome() +
-                ". " + trattativa.getClubAcquirente().getNome() + " paga " + formatCurrency(trattativa.getPrezzoTrattativa()) + " al " +
-                trattativa.getClubVenditore().getNome());
-
-        trattativa = null;
-        trattativaAccettata = false;
     }
 
     public synchronized boolean isTrattativaAccettata() {
@@ -74,4 +77,5 @@ public class AgentiCalcistici {
     private String formatCurrency(int amount) {
         return NumberFormat.getCurrencyInstance(Locale.ITALY).format(amount);
     }
+
 }

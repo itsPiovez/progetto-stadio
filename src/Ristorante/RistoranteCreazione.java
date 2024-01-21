@@ -10,6 +10,7 @@ public class RistoranteCreazione {
     public static List<Ristorante.Tavolo> tavoli = new ArrayList<>();
     public static Ristorante.Menu menu = new Ristorante.Menu();
     public RistoranteCreazione(){
+        menu.stampaMenu();
         List<Ristorante.Cameriere> camerieri = new ArrayList<>();
         List<Ristorante.Cuoco> cuochi = new ArrayList<>();
         final int numClients = 100;  // Rendi la variabile finale

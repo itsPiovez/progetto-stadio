@@ -24,12 +24,6 @@ public class MerchShop {
             System.out.println("Lista dei prezzi Merch:");
             for (int i = 0; i < Oggetti.size(); i++) {
                 String oggetto = Oggetti.get(i);
-                if(oggetto == "patatine"){
-                    System.out.println("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
-                    System.out.print("\u001B[34m"+"----------------------------------------"+"\u001B[0m");
-                    System.out.println("");
-                    System.out.println("Lista dei prezzi del Bar:");
-                }
                 oggetto = Character.toUpperCase(oggetto.charAt(0)) + oggetto.substring(1);
                 System.out.println(oggetto + ": €" + FormatoPrezzo(PrezzoOggetti.get(i)));
             }
@@ -100,10 +94,6 @@ public class MerchShop {
         oggetti.add("pantaloncino");
         oggetti.add("trombetta");
         oggetti.add("felpa");
-        oggetti.add("patatine");
-        oggetti.add("bibita");
-        oggetti.add("panino");
-        oggetti.add("birra");
         return oggetti;
     }
 
@@ -116,10 +106,6 @@ public class MerchShop {
         prezzi.add(18.0);
         prezzi.add(12.0);
         prezzi.add(30.0);
-        prezzi.add(5.0);
-        prezzi.add(3.0);
-        prezzi.add(7.0);
-        prezzi.add(4.0);
         return prezzi;
     }
 

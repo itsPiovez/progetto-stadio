@@ -1,68 +1,119 @@
 package Azioni;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 import Merch.*;
+import Bar.*;
 import Ristorante.*;
 import Bagni.*;
-import Bar.*;
 import TransferMarket.*;
 import java.util.List;
 import CambioColore.Colore;
 import Annunci.*;
 import java.util.Scanner;
 
-
-
 public class Main {
     public static boolean random;
-    public static void main(String[] args) {/*
-        Transfermarket transfermarket = new Transfermarket();
-        transfermarket.start();
-        try {
-            transfermarket.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        AggiungiSleep();*/
+    public static void main(String[] args)
+    {
         Caricamento();
-        System.out.println("");
-        System.out.println("Vuoi visualizzare le azioni dei tifosi con colori random? (S/N)");
+
+        // Aggiunta gestione dell'input per la domanda sui colori random
         Scanner scanner = new Scanner(System.in);
-        char answer = scanner.next().charAt(0);
-        if (answer == 'S' || answer == 's') {
+        char answer = ' ';
+        boolean inputValido = false;
+
+        while (!inputValido) {
+            try {
+                System.out.print("Vuoi visualizzare le azioni dei tifosi con colori random? (S/N): ");
+                System.out.flush();  // Flush the output to ensure the prompt is displayed immediately
+
+                answer = scanner.nextLine().charAt(0);
+
+                if (answer == 'S' || answer == 's' || answer == 'N' || answer == 'n') {
+                    inputValido = true;
+                } else {
+                    System.out.println("Inserisci un carattere valido (S/N).");
+                }
+            } catch (Exception e) {
+                System.out.print("");
+            }
+        }
+
+        if (answer == 'S' ||     answer == 's') {
             System.out.println("Ok, ora puoi vedere le azioni dei tifosi con colori random");
             random = true;
-        } else if (answer == 'N' || answer == 'n') {
+        } else {
             System.out.println("Ok, ora puoi vedere le azioni dei tifosi con colori standard");
             random = false;
-        } else {
-            System.out.println("Non hai inserito un carattere valido, ora puoi vedere le azioni dei tifosi con colori standard");
-            random = false;
         }
-        AggiungiSleep();
+
+        // Chiedi all'utente se vuole entrare nel Transfermarket
+        System.out.print("\nVuoi entrare nel Transfermarket? (S/N): ");
+        char choice = scanner.nextLine().charAt(0);
+
+        if (choice == 'S' || choice == 's') {
+            AgentiCalcistici agentiCalcistici = new AgentiCalcistici(); // Creare un'istanza di AgentiCalcistici
+            Transfermarket transfermarket = new Transfermarket();
+            transfermarket.start();
+
+            // Attendi che la trattativa del Transfermarket sia completata con successo o entro il timeout
+            long timeout = System.currentTimeMillis() + 30000; // Timeout massimo di 30 secondi
+            while (!agentiCalcistici.isTrattativaAccettata() && System.currentTimeMillis() < timeout) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (!agentiCalcistici.isTrattativaAccettata()) {
+                // Timeout scaduto
+            }
+
+
+            /*
+            // Attendi che la trattativa del Transfermarket sia completata con successo
+            while (!agentiCalcistici.isTrattativaAccettata()) {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            */
+        }
+
+
+        //AggiungiSleep();
         Merch merch = new Merch();
-        Bar bar = new Bar();
+        Caffetteria caffetteria = new Caffetteria();
         Ristorante.RistoranteCreazione ristoranteCreazione = new Ristorante.RistoranteCreazione();
         CreaAnnunci annunci = new CreaAnnunci();
         Bagni.BagniCreazione bagniCreazione = new Bagni.BagniCreazione();
+        
+
+        // Ciclo dei tifosi
         List<Tifoso> tot = CreaTifo.CreaTifoso(100);
         if (tot != null && !tot.isEmpty()) {
-            // voglio che i tifosi che entrano in questo ciclo vengono sbalzati nella classe azionetifoso
             for (Tifoso tifoso : tot) {
                 AzioneTifoso azioneTifoso = new AzioneTifoso(tifoso.GetNome());
                 new Thread(azioneTifoso).start();
             }
         }
+
+        scanner.close();
+        //Caffetteria.bar.ChiudiBar();
+
     }
 
+    /*
     public static void AggiungiSleep(){
         try {
-            Thread.sleep(10000);
+            Thread.sleep(30000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+     */
 
     public static void Caricamento() {   //feature Marco
         int numeroIterazioni = 20;

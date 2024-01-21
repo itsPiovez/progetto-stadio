@@ -13,23 +13,17 @@ public class Merch {
 
     public Merch() {
         merchShop.Apertura();
-        int NumeroClienti = 200;
-            List<Integer> numeriClienti = numeriClientiTot;
-            int i = 0;
-            while (numeriClienti.size() < NumeroClienti) {
-                i++;
-                numeriClienti.add(i);
+        List<Integer> numeriClienti = numeriClientiTot;
+        int i = 0;
+        Collections.shuffle(numeriClienti);
+        List<Thread> clientiThreads = Merch.clientiThreads;
+        for (Thread ClienteThread : clientiThreads) {
+            try {
+                ClienteThread.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
             }
-            Collections.shuffle(numeriClienti);
-            List<Thread> clientiThreads = Merch.clientiThreads;
-            for (Thread ClienteThread : clientiThreads) {
-                try {
-                    ClienteThread.join();
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
-                }
-            }
-
+        }
     }
 }

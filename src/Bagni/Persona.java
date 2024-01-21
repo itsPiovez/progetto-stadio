@@ -52,7 +52,7 @@ public class Persona extends Thread {
             System.err.println("La persona non ha una toilet associata.");
             return;
         }
-        usa_bagno();
+        //usa_bagno();
     }
 
 }

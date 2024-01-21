@@ -18,7 +18,6 @@ public class AzioneTifoso extends Thread {
     private Random random = new Random();
 
     private MerchShop merchShop;
-    private Bar bar;
 
     public AzioneTifoso(String nomeTifoso) {
         this.nomeTifoso = nomeTifoso;
@@ -136,10 +135,10 @@ public class AzioneTifoso extends Thread {
             // altrimenti lo aggiungo alla lista di toilet per donne
             if (sesso.equals("uomo")) {
                 t = BagniCreazione.uomini.get(random.nextInt(uomini.size()));
-                p = new Persona(sesso, "Tifoso " + (int) this.getId(), t);
+                p = new Persona(sesso, "Tifoso " + Tifoso.GetID(nomeTifoso), t);
             } else {
                 t = donne.get(random.nextInt(donne.size()));
-                p = new Persona(sesso, "Tifoso " + (int) this.getId(), t);
+                p = new Persona(sesso, "Tifoso " + Tifoso.GetID(nomeTifoso), t);
             }
 
             // Aggiungi la persona alla coda
@@ -157,18 +156,25 @@ public class AzioneTifoso extends Thread {
 
     private void andareAlBar() {
         System.out.println(nomeTifoso + " sta andando al bar.");
+        int NumeroCliente = Tifoso.GetID(nomeTifoso);
+        ClientiBar Cliente = new ClientiBar("Tifoso "+NumeroCliente, Caffetteria.bar);
 
-        int NumeroCliente = (int) this.getId();
-        Caffetteria.numeriClienti.add(NumeroCliente);
-        Thread ClienteThread = new Thread(new ClientiBar("Tifoso "+NumeroCliente, bar));
-        Caffetteria.clientiThreads.add(ClienteThread);
-        ClienteThread.start();
+        // Prova ad acquisire il permesso, se non riesce, esci dal metodo
+        if (!Caffetteria.bar.tryAcquire()) {
+            System.out.println("Il bar è pieno, " + nomeTifoso + " non può entrare.");
+            return;
+        }
+        //Caffetteria.clientiThreads.push(Cliente);
+        Cliente.start();
         try {
-            Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
+            Thread.sleep(random.nextInt(3000) + 1000); // Attendi tra 1 e 4 secondi
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            Caffetteria.bar.release();  // Rilascia il permesso anche se si verifica un'eccezione
         }
         System.out.println(nomeTifoso + " è tornato dal bar.");
+
     }
 
 
@@ -176,7 +182,8 @@ public class AzioneTifoso extends Thread {
 
         System.out.println(nomeTifoso + " sta andando al merch shop.");
 
-        int NumeroCliente = (int) this.getId();
+        int NumeroCliente = Tifoso.GetID(nomeTifoso);
+
         Merch.numeriClientiTot.add(NumeroCliente);
         Thread ClienteThread = new Thread(new ClientiMerch("Tifoso "+NumeroCliente, merchShop));
         Merch.clientiThreads.add(ClienteThread);

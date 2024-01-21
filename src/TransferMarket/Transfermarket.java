@@ -11,7 +11,6 @@ public class Transfermarket extends Thread{
 
     public  Transfermarket() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("\n - - - TRANSFERMARKET - - - ");
 
         // Inserisci il nome del giocatore (assicurati che l'input non sia un numero)
@@ -21,8 +20,8 @@ public class Transfermarket extends Thread{
 
         while (!inputValidoGiocatore) {
             nomeGiocatore = scanner.nextLine();
-            if (nomeGiocatore.matches(".*\\d+.*")) {
-                System.out.println("Inserisci un nome valido senza numeri.");
+            if (nomeGiocatore.matches(".*\\d+.*") || nomeGiocatore.contains(" ")) {
+                System.out.println("Inserisci un nome valido senza numeri o spazi.");
                 System.out.print("Inserisci il nome del giocatore: ");
             } else {
                 inputValidoGiocatore = true;
@@ -51,8 +50,8 @@ public class Transfermarket extends Thread{
 
         while (!inputValidoClubVenditore) {
             nomeClubVenditore = scanner.nextLine();
-            if (nomeClubVenditore.matches(".*\\d+.*")) {
-                System.out.println("Inserisci un nome valido senza numeri.");
+            if (nomeClubVenditore.matches(".*\\d+.*") || nomeClubVenditore.contains(" ")) {
+                System.out.println("Inserisci un nome valido senza numeri o spazi.");
                 System.out.print("Inserisci il nome del club venditore: ");
             } else {
                 inputValidoClubVenditore = true;
@@ -116,7 +115,7 @@ public class Transfermarket extends Thread{
         }).start();
 
         scanner.close();
-}
+    }
 
     private static String formatCurrency(int amount) {
         return NumberFormat.getCurrencyInstance(Locale.ITALY).format(amount);
