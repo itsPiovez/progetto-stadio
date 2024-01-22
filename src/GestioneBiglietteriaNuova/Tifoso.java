@@ -40,20 +40,26 @@ public class Tifoso extends Persona {
     public static Tifoso generaTifoso(String squadraTifata) {
         Random random = new Random();
 
-        String[] nomi = {"Mario", "Luigi", "Giovanni", "Anna", "Laura", "Francesca", "Antonio", "Maria", "Paolo", "Giulia",
-                "Marco", "Roberta", "Davide", "Elena", "Simone", "Chiara", "Alessandro", "Silvia", "Riccardo", "Valentina"};
-
+        String[] nomiM = { "Mario", "Luigi", "Giovanni", "Giuseppe", "Antonio", "Angelo", "Francesco", "Paolo", "Gianluca", "Stefano",
+                "Alessandro", "Davide", "Marco", "Luca", "Andrea", "Michele", "Matteo", "Leonardo", "Riccardo", "Gabriele"};
+        String[] nomiF = {"Maria", "Anna", "Laura", "Francesca", "Giulia", "Roberta", "Elena", "Chiara", "Silvia", "Valentina",
+                "Giorgia", "Martina", "Sara", "Alessia", "Alice", "Giada", "Elisa", "Federica", "Veronica", "Alessandra"};
         String[] cognomi = {"Rossi", "Verdi", "Bianchi", "Mancini", "Ricci", "Moretti", "Conti", "Rizzo", "Ferrari", "Lombardi",
                 "Galli", "Poli", "Fabbri", "Martini", "Vitali", "Barbieri", "Santini", "Rizzo", "Gentile", "Colombo"};
-
+        String nome;
         char[] sessi = {'M', 'F'};
-
-        String nome = nomi[random.nextInt(nomi.length)];
+        char sesso = sessi[random.nextInt(sessi.length)];
+        if (sesso == 'M'){
+             nome = nomiM[random.nextInt(nomiM.length)];
+        } else {
+             nome = nomiF[random.nextInt(nomiF.length)];
+        }
         String cognome = cognomi[random.nextInt(cognomi.length)];
         int eta = random.nextInt(106);
-        char sesso = sessi[random.nextInt(sessi.length)];
 
         return new Tifoso(nome, cognome, eta, sesso, squadraTifata);
+
+
     }
 
     public static void stampaInfoTifosi(List<Tifoso> tifosi) {

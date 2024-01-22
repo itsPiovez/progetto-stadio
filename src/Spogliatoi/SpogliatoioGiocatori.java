@@ -1,4 +1,7 @@
+package Spogliatoi;
+
 import java.util.ArrayList;
+import Giocatori.Giocatore;
 
 public class SpogliatoioGiocatori {
     //passano una lista di giocatori che dovrebbe essere 2 ( giocatori in casa e giocatori fuori casa)

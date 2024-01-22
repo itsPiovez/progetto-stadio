@@ -1,5 +1,4 @@
 package Giocatori;
-import Spogliatoi.SpogliatoioGiocatori;
 public class Giocatore {
     private String nome;
     private int numeroMaglia; //numero di maglia dei giocatori
