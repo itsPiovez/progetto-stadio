@@ -41,14 +41,13 @@ public class Main {
         System.out.println("0. USCITA");
         System.out.println("Scegli l'operazione: ");
     }
-
+public static List<Tifoso> tifosiGenerati=new ArrayList<>();
     public static boolean generaTifosi(){
         int scelta = 0;
         boolean controllo = false;
         int numeroTifosiDaGenerare = 10000;
-        List<Tifoso> tifosiGenerati = new ArrayList<>();
-        Steward s = new Steward(tifosiGenerati, numeroTifosiDaGenerare);
-        Medici m = new Medici(tifosiGenerati, numeroTifosiDaGenerare);
+        Steward s = new Steward(numeroTifosiDaGenerare);
+        Medici m = new Medici(numeroTifosiDaGenerare);
         s.start();
         m.start();
 

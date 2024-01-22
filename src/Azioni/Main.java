@@ -9,7 +9,7 @@ import java.util.List;
 import CambioColore.Colore;
 import Annunci.*;
 import java.util.Scanner;
-
+import GestioneBiglietteriaNuova.*;
 public class Main {
     public static boolean random;
     public static void main(String[] args)
@@ -74,10 +74,13 @@ public class Main {
         Ristorante.RistoranteCreazione ristoranteCreazione = new Ristorante.RistoranteCreazione();
         CreaAnnunci annunci = new CreaAnnunci();
         Bagni.BagniCreazione bagniCreazione = new Bagni.BagniCreazione();
-        
+
+
 
         // Ciclo dei tifosi
         List<Tifoso> tot = CreaTifo.CreaTifoso(100);
+
+        System.out.println(GestioneBiglietteriaNuova.Main.tifosiGenerati.size());
         if (tot != null && !tot.isEmpty()) {
             for (Tifoso tifoso : tot) {
                 AzioneTifoso azioneTifoso = new AzioneTifoso(tifoso.GetNome());
