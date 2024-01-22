@@ -235,8 +235,22 @@ public static List<Tifoso> tifosiGenerati=new ArrayList<>();
                                 loginRegister.logout();
                                 controllo = generaTifosi();
 
-                                AttendiTempo();
-                                Azioni.Main.main(args);
+                                sleep(10000);
+                                Thread azioniThread = new Thread(new Runnable() {
+                                    public void run() {
+                                        Azioni.Main.main(args);
+                                    }
+                                });
+                                azioniThread.start();
+                                azioniThread.join();  // Wait for the threads to complete
+                                sleep(300000);
+
+                                // Wait for the threads to complete before calling GestioneMatch.Main.main(args)
+                                try {
+                                    GestioneMatch.Main.main(args);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
                                 break;
                             case 1:
                                 System.out.println("\nPartite attualmente disponibili: ");
@@ -479,15 +493,13 @@ public static List<Tifoso> tifosiGenerati=new ArrayList<>();
                     System.err.println("ERRORE: E' richiesto l'inserimento di un numero");
                 } catch (PartitaErrore | NominativoErrore ex) {
                     System.err.println("ERRORE: " + ex.getMessage());
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             } while (scelta != 0 && scelta != 6 && scelta != 7);
         }while (controllo);
     }
-    public static void AttendiTempo(){
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void sleep(int ms) throws InterruptedException {
+        Thread.sleep(ms);
     }
 }

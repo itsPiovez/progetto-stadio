@@ -10,6 +10,7 @@ import CambioColore.Colore;
 import Annunci.*;
 import java.util.Scanner;
 import GestioneBiglietteriaNuova.*;
+import GestioneMatch.*;
 public class Main {
     public static void main(String[] args) {
         int i=0;
@@ -28,7 +29,11 @@ public class Main {
                 Azioni.Main.main(args);
                 break;
             case 3:
-                //MatchCalcio.Main.main(args);
+                try {
+                    GestioneMatch.Main.main(args);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case 4:
                 System.exit(0);
