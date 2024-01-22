@@ -36,8 +36,8 @@ public class Main {
         System.out.println("3. Sostituzione nominativo su Biglietto");
         System.out.println("4. Vendita Abbonamento");
         System.out.println("5. Parcheggia auto");
-        System.out.println("6. Gestione Sicurezza");
-        System.out.println("7. USCITA");
+        System.out.println("6. Logout");
+        System.out.println("0. USCITA");
         System.out.println("Scegli l'operazione: ");
     }
 
@@ -230,7 +230,7 @@ public class Main {
                     }
                     else {
                         switch (scelta) {
-                            case 6:
+                            case 0:
                                 System.out.println("\nGrazie! Arrivederci!");
                                 loginRegister.logout();
                                 controllo = generaTifosi();
@@ -461,8 +461,9 @@ public class Main {
                                     System.out.println("Il parcheggio è pieno. Impossibile parcheggiare.");
                                 }
                                 break;
-                            case 7:
-                            System.out.println("\nLogout!\n");
+                            case 6:
+
+                                System.out.println("\nLogout!\n");
                                 loginRegister.logout();
                                 break;
                         }
