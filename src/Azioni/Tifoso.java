@@ -8,7 +8,7 @@ public class Tifoso {
     }
     public String GetNome(){
         return nome;
-    }
+    }/*
     public static int GetID(String input){
         int length = input.length();
         int result = 0;
@@ -20,7 +20,7 @@ public class Tifoso {
             }
         }
         return result;
-    }
+    }*/
 
 }
 

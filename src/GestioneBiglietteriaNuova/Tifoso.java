@@ -79,4 +79,8 @@ public class Tifoso extends Persona {
         System.out.println("Numero di tifosi: " + numeroTifosi);
         System.out.println("Età media dei tifosi: " + etaMedia);
     }
+
+    public String GetNome(){
+        return nome+" "+cognome;
+    }
 }

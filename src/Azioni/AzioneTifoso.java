@@ -135,10 +135,10 @@ public class AzioneTifoso extends Thread {
             // altrimenti lo aggiungo alla lista di toilet per donne
             if (sesso.equals("uomo")) {
                 t = BagniCreazione.uomini.get(random.nextInt(uomini.size()));
-                p = new Persona(sesso, "Tifoso " + Tifoso.GetID(nomeTifoso), t);
+                p = new Persona(sesso, nomeTifoso, t);
             } else {
                 t = donne.get(random.nextInt(donne.size()));
-                p = new Persona(sesso, "Tifoso " + Tifoso.GetID(nomeTifoso), t);
+                p = new Persona(sesso, nomeTifoso, t);
             }
 
             // Aggiungi la persona alla coda
@@ -156,8 +156,8 @@ public class AzioneTifoso extends Thread {
 
     private void andareAlBar() {
         System.out.println(nomeTifoso + " sta andando al bar.");
-        int NumeroCliente = Tifoso.GetID(nomeTifoso);
-        ClientiBar Cliente = new ClientiBar("Tifoso "+NumeroCliente, Caffetteria.bar);
+        //int NumeroCliente = Tifoso.GetID(nomeTifoso);
+        ClientiBar Cliente = new ClientiBar(nomeTifoso, Caffetteria.bar);
 
         // Prova ad acquisire il permesso, se non riesce, esci dal metodo
         if (!Caffetteria.bar.tryAcquire()) {
@@ -182,10 +182,10 @@ public class AzioneTifoso extends Thread {
 
         System.out.println(nomeTifoso + " sta andando al merch shop.");
 
-        int NumeroCliente = Tifoso.GetID(nomeTifoso);
+        //int NumeroCliente = Tifoso.GetID(nomeTifoso);
 
-        Merch.numeriClientiTot.add(NumeroCliente);
-        Thread ClienteThread = new Thread(new ClientiMerch("Tifoso "+NumeroCliente, merchShop));
+        //Merch.numeriClientiTot.add(NumeroCliente);
+        Thread ClienteThread = new Thread(new ClientiMerch(nomeTifoso, merchShop));
         Merch.clientiThreads.add(ClienteThread);
         ClienteThread.start();
 

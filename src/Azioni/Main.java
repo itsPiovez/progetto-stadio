@@ -75,11 +75,9 @@ public class Main {
         CreaAnnunci annunci = new CreaAnnunci();
         Bagni.BagniCreazione bagniCreazione = new Bagni.BagniCreazione();
 
+        // Ciclo dei tifosin
 
-
-        // Ciclo dei tifosi
-        List<Tifoso> tot = CreaTifo.CreaTifoso(100);
-
+        List<Tifoso> tot = CreaTifo.ModificaTifoso(GestioneBiglietteriaNuova.Main.tifosiGenerati);
         System.out.println(GestioneBiglietteriaNuova.Main.tifosiGenerati.size());
         if (tot != null && !tot.isEmpty()) {
             for (Tifoso tifoso : tot) {
@@ -87,7 +85,6 @@ public class Main {
                 new Thread(azioneTifoso).start();
             }
         }
-
         scanner.close();
     }
 

@@ -3,7 +3,7 @@ package Annunci;
 import java.util.Random;
 
 import static Annunci.CreaAnnunci.stampaArcobaleno;
-
+import java.util.Scanner;
 public class Annunci extends Thread {
     private String[] messaggi;
     private Random random = new Random();
@@ -31,7 +31,7 @@ public class Annunci extends Thread {
 
     private void attesaCasuale() {
         try {
-            int tempoAttesa = random.nextInt(5000) + 10000; // Attesa tra 1 e 5 secondi
+            int tempoAttesa = random.nextInt(5000) + 1000; // Attesa tra 1 e 5 secondi
             Thread.sleep(tempoAttesa);
         } catch (InterruptedException e) {
             e.printStackTrace();
