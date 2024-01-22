@@ -68,22 +68,7 @@ public class Main {
             if (!agentiCalcistici.isTrattativaAccettata()) {
                 // Timeout scaduto
             }
-
-
-            /*
-            // Attendi che la trattativa del Transfermarket sia completata con successo
-            while (!agentiCalcistici.isTrattativaAccettata()) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            */
         }
-
-
-        //AggiungiSleep();
         Merch merch = new Merch();
         Caffetteria caffetteria = new Caffetteria();
         Ristorante.RistoranteCreazione ristoranteCreazione = new Ristorante.RistoranteCreazione();
@@ -101,19 +86,7 @@ public class Main {
         }
 
         scanner.close();
-        //Caffetteria.bar.ChiudiBar();
-
     }
-
-    /*
-    public static void AggiungiSleep(){
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-     */
 
     public static void Caricamento() {   //feature Marco
         int numeroIterazioni = 20;
@@ -161,4 +134,5 @@ public class Main {
         System.out.println("");
     }
 }
+
 

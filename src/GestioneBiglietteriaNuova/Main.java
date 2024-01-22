@@ -44,7 +44,7 @@ public class Main {
     public static boolean generaTifosi(){
         int scelta = 0;
         boolean controllo = false;
-        int numeroTifosiDaGenerare = 1000;
+        int numeroTifosiDaGenerare = 40000;
         List<Tifoso> tifosiGenerati = new ArrayList<>();
         Steward s = new Steward(tifosiGenerati, numeroTifosiDaGenerare);
         Medici m = new Medici(tifosiGenerati, numeroTifosiDaGenerare);
