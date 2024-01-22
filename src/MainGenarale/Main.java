@@ -37,6 +37,5 @@ public class Main {
                 System.out.println("Inserisci un numero valido");
                 break;
         }
-
     }
 }
