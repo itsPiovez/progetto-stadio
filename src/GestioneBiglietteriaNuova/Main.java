@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import Azioni.*;
 
 public class Main {
     public static void stampaMenuAdmin(){
@@ -44,7 +45,7 @@ public class Main {
     public static boolean generaTifosi(){
         int scelta = 0;
         boolean controllo = false;
-        int numeroTifosiDaGenerare = 40000;
+        int numeroTifosiDaGenerare = 10000;
         List<Tifoso> tifosiGenerati = new ArrayList<>();
         Steward s = new Steward(tifosiGenerati, numeroTifosiDaGenerare);
         Medici m = new Medici(tifosiGenerati, numeroTifosiDaGenerare);
@@ -234,6 +235,9 @@ public class Main {
                                 System.out.println("\nGrazie! Arrivederci!");
                                 loginRegister.logout();
                                 controllo = generaTifosi();
+
+                                AttendiTempo();
+                                Azioni.Main.main(args);
                                 break;
                             case 1:
                                 System.out.println("\nPartite attualmente disponibili: ");
@@ -479,5 +483,12 @@ public class Main {
                 }
             } while (scelta != 0 && scelta != 6 && scelta != 7);
         }while (controllo);
+    }
+    public static void AttendiTempo(){
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
