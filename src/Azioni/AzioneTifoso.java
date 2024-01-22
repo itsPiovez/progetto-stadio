@@ -9,6 +9,7 @@ import CambioColore.Colore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import GestioneBiglietteriaNuova.*;
 
 import static Bagni.BagniCreazione.donne;
 import static Bagni.BagniCreazione.uomini;
@@ -127,18 +128,26 @@ public class AzioneTifoso extends Thread {
             Thread.sleep(random.nextInt(3000) + 5000); // Attendi tra 1 e 4 secondi
             // collego la classe bagno
             String sesso = random.nextBoolean() ? "uomo" : "donna";
-
             Toilet t;
-            Persona p;
+            Bagni.Persona p;
 
-            // Aggiungi che se il sesso del tifoso è maschio allora lo aggiungo alla lista di toilet per maschi
-            // altrimenti lo aggiungo alla lista di toilet per donne
+
+            if (GestioneBiglietteriaNuova.Main.tifosiGenerati.size() != 0) {
+                String[] nomiM = {"Mario", "Luigi", "Giovanni", "Giuseppe", "Antonio", "Angelo", "Francesco", "Paolo", "Gianluca", "Stefano", "Alessandro", "Davide", "Marco", "Luca", "Andrea", "Michele", "Matteo", "Leonardo", "Riccardo", "Gabriele"};
+                String nome = nomeTifoso.split(" ")[0];
+                sesso="donna";
+                for (String nome1 : nomiM) {
+                    if (nome.equals(nome1)) {
+                        sesso = "uomo";
+                    }
+                }
+            }
             if (sesso.equals("uomo")) {
                 t = BagniCreazione.uomini.get(random.nextInt(uomini.size()));
-                p = new Persona(sesso, nomeTifoso, t);
+                p = new Bagni.Persona(sesso, nomeTifoso, t);
             } else {
                 t = donne.get(random.nextInt(donne.size()));
-                p = new Persona(sesso, nomeTifoso, t);
+                p = new Bagni.Persona(sesso, nomeTifoso, t);
             }
 
             // Aggiungi la persona alla coda
