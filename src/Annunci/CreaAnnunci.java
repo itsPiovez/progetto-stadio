@@ -6,7 +6,7 @@ public class CreaAnnunci {
         annunci.start();
     }
 
-    public String[] GetAnnuncio(){
+    public static String[] GetAnnuncio(){
         String[] annuncio = new String[7];
 
         annuncio[0] ="\u001B[1m"+"\u001B[40m"+" Forza Juve "+"\u001B[0m"+"\n"+"Juve, storia di un grande amore\n" +"Bianco che abbraccia il nero\n" + "Coro che si alza davvero, per te" ;

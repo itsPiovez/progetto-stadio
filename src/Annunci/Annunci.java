@@ -9,14 +9,16 @@ public class Annunci extends Thread {
     private Random random = new Random();
 
     public Annunci(String[] messaggi) {
-        this.messaggi = messaggi;
+        this.messaggi =  CreaAnnunci. GetAnnuncio();
     }
 
     @Override
     public void run() {
-        while (true) {
+        int i = 0;
+        while (i < 10) {
             scriviAnnuncioCasuale();
             attesaCasuale();
+            i++;
         }
     }
 
