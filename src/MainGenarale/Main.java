@@ -19,8 +19,11 @@ public class Main {
         System.out.println("2) Visualizza le azioni dei tifosi nello stadio");
         System.out.println("3) Visualizza le azioni del match di calcio");
         System.out.println("4) Esci");
+        System.out.println("----------------------------------");
+        System.out.print("Scelta: ");
         Scanner scanner = new Scanner(System.in);
         i = scanner.nextInt();
+        System.out.println("----------------------------------");
         switch (i){
             case 1:
                 GestioneBiglietteriaNuova.Main.main(args);

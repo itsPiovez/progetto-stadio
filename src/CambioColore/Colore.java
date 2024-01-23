@@ -3,15 +3,15 @@ package CambioColore;
 import java.util.Random;
 
 public class Colore {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String reset = "\u001B[0m";
+    public static final String black = "\u001B[30m";
+    public static final String red = "\u001B[31m";
+    public static final String green = "\u001B[32m";
+    public static final String yellow = "\u001B[33m";
+    public static final String blue = "\u001B[34m";
+    public static final String purple = "\u001B[35m";
+    public static final String cyan = "\u001B[36m";
+    public static final String white = "\u001B[37m";
 
     public static String getRandomColor() {
         Random random = new Random();
@@ -19,30 +19,30 @@ public class Colore {
 
         switch (colorIndex) {
             case 0:
-                return ANSI_WHITE;
+                return white;
             case 1:
-                return ANSI_RED;
+                return red;
             case 2:
-                return ANSI_GREEN;
+                return green;
             case 3:
-                return ANSI_YELLOW;
+                return yellow;
             case 4:
-                return ANSI_BLUE;
+                return blue;
             case 5:
-                return ANSI_PURPLE;
+                return purple;
             case 6:
-                return ANSI_CYAN;
+                return cyan;
             case 7:
-                return ANSI_WHITE;
+                return white;
             default:
-                return ANSI_RESET; // Default a reset nel caso qualcosa vada storto
+                return reset; // Default a reset nel caso qualcosa vada storto
         }
     }
 
     public static String getRandomColor(String text) {
-        return getRandomColor() + text + ANSI_RESET;
+        return getRandomColor() + text + reset;
     }
     public static String colorize(String text, String color) {
-        return color + text + ANSI_RESET;
+        return color + text + reset;
     }
 }
