@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+//Main precedente
 public class RistoranteCreazione {
     public static Ristorante.Coda<Ristorante.Cliente> coda = new Ristorante.Coda<>();
     public static List<Ristorante.Tavolo> tavoli = new ArrayList<>();

@@ -46,30 +46,35 @@ public class Cliente extends Tifoso implements Runnable {
                 }
             }
         }
+
         // Ora il cliente è stato accomodato e può ordinare
         System.out.println("        Cameriere accomoda " + nome + " al tavolo " + tavolo.getNumero());
 
         cadutaPosata(tavolo); // Passa il tavolo come parametro //FEATURE AGGIUNTA
-        int numeroPiatti = (int) (Math.random() * 4) + 1;  // Numero di piatti da ordinare
-        // ... (resto del codice)
+
+        int numeroPiatti = (int) (Math.random() * 4) + 1;  // Numero di piatti da ordinare (da 1 a 4)
 
         String bevandaScelta = ScegliBevanda();
         double prezzoBevanda = menu.getPrezzo(bevandaScelta);
         totale=totale+prezzoBevanda;
+
         int tempoDiPreparazioneBevanda = menu.getTempoDiPreparazione(bevandaScelta);
         System.out.println(nome + " ordina " + bevandaScelta + " al tavolo " + tavolo.getNumero() + " (prezzo: " + prezzoBevanda + "€)");
+
         for (int i = 0; i < numeroPiatti; i++) {
             String piattoScelto = null;
             switch (i){
-                case 0: piattoScelto =ScegliPrimo(); break;
-                case 1:  piattoScelto =ScegliSecondo(); break;
-                case 2: piattoScelto =ScegliContorno(); break;
-                case 3: piattoScelto =ScegliDolce(); break;
+                case 0: piattoScelto = ScegliPrimo(); break;
+                case 1:  piattoScelto = ScegliSecondo(); break;
+                case 2: piattoScelto = ScegliContorno(); break;
+                case 3: piattoScelto = ScegliDolce(); break;
             }
             double prezzo = menu.getPrezzo(piattoScelto);
             totale=totale+prezzo;
             int tempoDiPreparazione = menu.getTempoDiPreparazione(piattoScelto);
+
             System.out.println(nome + " ordina " + piattoScelto + " al tavolo " + tavolo.getNumero() + " (prezzo: " + prezzo + "€)");
+
             // Simulazione dell'ordinazione e preparazione del cibo
             tavolo.ordinaCibo(this, tempoDiPreparazione);
         }

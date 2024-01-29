@@ -44,7 +44,7 @@ public class Cameriere implements Runnable {
                 return tavolo;
             }
         }
-        return null; // Dovrebbe essere gestito meglio, ad esempio ritentando dopo un certo intervallo
+        return null;
     }
 
     //FEATURE AGGIUNTA
